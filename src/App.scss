@@ -1,0 +1,40 @@
+@use './css/config/mixin';
+@use './css/config/variables';
+@use './css/config/color.scss' as color;
+@use './css/config/font.scss';
+
+body {
+    font-family: "Pretendard";
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+button,
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: color.$text;
+    border: 0;
+    cursor: pointer;
+}
+
+p {
+    margin: 0;
+}
+
+ul,
+li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+h1,
+h2,
+h2 {
+    margin: 0;
+}
+
+.App {
+    // background-color: red;
+}
