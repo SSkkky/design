@@ -28,6 +28,7 @@ export const Header = (props) => {
           <h1>SKY</h1>
         </a>
         <p className="menu-name">{menuList[activeMenu]}</p>
+        <div className='empty'></div>
         <a href="" className='contect'>
           <p>CONTECT</p>
         </a>

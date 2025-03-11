@@ -1,0 +1,44 @@
+{
+    "skills": [
+        {
+            "name": "HTML",
+            "description": "웹 페이지의 구조를 정의하는 마크업 언어",
+            "topics": [
+                "HTML5 시멘틱 태그 사용",
+                "접근성을 고려한 웹 페이지 제작"
+            ]
+        },
+        {
+            "name": "CSS/SCSS",
+            "description": "웹 페이지의 스타일을 정의하는 언어",
+            "topics": [
+                "flexbox, 가상 클래스 등을 사용한 스타일 작성",
+                "Sass(SCSS)를 사용한 스타일 관리 및 재사용 가능한 코드 작성"
+            ]
+        },
+        {
+            "name": "JS/TS",
+            "description": "웹 페이지의 동작을 정의하는 프로그래밍 언어",
+            "topics": [
+                "ES6+ 문법을 사용하여 인터랙티브한 웹 페이지를 구현",
+                "타입을 사용한 안전성 보장 경험"
+            ]
+        },
+        {
+            "name": "React",
+            "description": "사용자 인터페이스를 구축하기 위한 JavaScript 라이브러리",
+            "topics": [
+                "상태 관리 (useState, useReducer)를 통한 데이터 흐름 제어 경험",
+                "재사용 가능한 UI 컴포넌트를 제작"
+            ]
+        },
+        {
+            "name": "Next.js",
+            "description": "React 기반의 서버 사이드 렌더링 프레임워크",
+            "topics": [
+                "SSR을 활용한 최적화 웹서비스 구현 경험",
+                "API 엔드포인트 생성하여 클라이언트, 서버간 통신 처리"
+            ]
+        }
+    ]
+}

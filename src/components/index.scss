@@ -52,6 +52,7 @@
             }
 
             section {
+                margin-top: 0.5rem;
                 display: flex;
                 gap: 1rem;
             }
@@ -107,7 +108,6 @@
 }
 
 .scrollSection.skills {
-    transition: 0.3s ease-in-out;
     // background-color: rgba(0, 0, 0, 0);
 
     // &.onSkills {
@@ -118,39 +118,65 @@
         width: 70vw;
         margin-top: calc(4vw + 48px);
         margin-left: 30vw;
-        border-left: 1px solid var(--border-color, rgba(0, 0, 0, 1));
         height: calc(100vh - 4vw - 48px);
         box-sizing: border-box;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         grid-template-rows: auto auto;
 
         li {
             grid-column: span 1;
-            border: 1px solid black;
-            border-width: 0 1px 1px 0;
-            transition: 0.2s ease;
+            transition: 0.2s;
+            border-style: solid;
+            border-width: 1px 0 0 0;
+            border-color: #000;
+            position: relative;
+            background-color: color.$white;
+
+            &::after {
+                transition: 0.2s;
+                content: "";
+                position: absolute;
+                top: -2rem;
+                left: 0;
+                width: 8rem;
+                height: 2rem;
+                border-radius: 0.5rem 1rem 0 0;
+                border-width: 1px 1px 0 1px;
+                border-color: #000;
+                border-style: solid;
+                background-color: color.$white;
+            }
 
             b {
-                font-size: 3rem;
+                font-size: 1.5rem;
             }
 
             p {
                 padding-top: 1rem;
+                padding-left: 1.5rem;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    width: 4px;
+                    height: 4px;
+                    background-color: #000;
+                    border-radius: 1rem;
+                    position: absolute;
+                    top: 50%;
+                    left: 0.5rem;
+                    transform: translateY(6px);
+                }
             }
 
             section {
                 padding: 1rem;
             }
 
-            &:hover {
-                background-color: beige;
+            &:last-child {
+                border-width: 1px 0;
             }
-        }
-
-        li:nth-child(4),
-        li:nth-child(5) {
-            border-width: 0 1px 0 0;
         }
     }
 }
@@ -160,7 +186,7 @@
         width: 100vw;
         height: 100vh;
         border-radius: 5vw;
-        background-color: #111;
+        // background-color: #111;
         position: absolute;
     }
 
