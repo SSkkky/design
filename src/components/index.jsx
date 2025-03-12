@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import myPic from 'assets/image/gom.jpg';
+import myPic from 'assets/image/girl.png';
 import './index.scss';
 import data from 'data/data.json';
+import TextAnimationGSAP from 'components/TextAnimationGSAP';
 
 const Main = (props) => {
     const { sectionRefs, ScrollTrigger, gsap } = props;
@@ -63,7 +64,6 @@ const Main = (props) => {
             <b className="main-title" ref={titleRef}>dev.</b>
             <article className='sub-title' ref={subTitleRef}>
                 <p>2024-25</p>
-                <p>DEVELOP</p>
                 <p>WEB PORTFOLIO</p>
             </article>
             <section className='Introduction' ref={introRef}>
@@ -93,14 +93,14 @@ const Skills = (props) => {
     const contentsRef = useRef(null);
     const liRefs = useRef([]);
     const dataIndex = 1;
-    
+
     useEffect(() => {
         const main = mainRef.current;
         const contents = contentsRef.current;
         const list = liRefs.current;
 
         list.forEach((item, index) => {
-            gsap.fromTo(item, 
+            gsap.fromTo(item,
                 {
                     opacity: 0,
                     y: 20
@@ -109,22 +109,22 @@ const Skills = (props) => {
                     opacity: 1,
                     y: 0,
                     duration: 0.2,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: item,
                         start: "top 90%",
                         toggleActions: "play none none reverse",
                         once: true,
-                        delay: index * 0.2
                     }
                 }
             );
 
             item.addEventListener('mouseenter', () => {
-                gsap.to(item, { x: 10, y: -40, duration: 0.2 });
+                gsap.to(item, { x: 5, y: -20, duration: 0.1 });
             });
 
             item.addEventListener('mouseleave', () => {
-                gsap.to(item, { x: 0, y: 0, duration: 0.2 });
+                gsap.to(item, { x: 0, y: 0, duration: 0.1 });
             });
         });
 
@@ -144,20 +144,20 @@ const Skills = (props) => {
             data-index={dataIndex}
         >
             <ul className='contents' ref={contentsRef}>
-               {data.skills.map((data, i)=>(
-                 <li
-                 key={i}
-                 ref={(el) => liRefs.current[i] = el}
-                 >
-                 <section>
-                     <b>{data.name}</b>
-                     {data.topics.map((topic, i)=> (
-                        <p key={i}>{topic}</p>
-                    ))}
-                 </section>
-             </li>
-               ))
-               }
+                {data.skills.map((data, i) => (
+                    <li
+                        key={i}
+                        ref={(el) => liRefs.current[i] = el}
+                    >
+                        <section>
+                            <b>{data.name}</b>
+                            {data.topics.map((topic, i) => (
+                                <p key={i}>{topic}</p>
+                            ))}
+                        </section>
+                    </li>
+                ))
+                }
             </ul>
         </section>
     )
@@ -174,29 +174,62 @@ const Works = (props) => {
         const main = mainRef.current;
         const contents = contentsRef.current;
 
-        gsap.fromTo(
-            main,
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: main,
+                start: "top bottom",
+                end: "top 50%",
+                scrub: true,
             },
-            {
+        })
+            .to(main, {
+                backgroundColor: 'rgba(0,0,0,0)',
+                duration: 0.5
+            })
+            .to(main, {
                 backgroundColor: 'rgba(0,0,0,1)',
-                ease: 'power2.out',
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: main,
-                    start: 'top 90%',
-                    end: 'bottom top',
-                    scrub: true,
-                    pin: true,
-                    pinSpacing: true,
-                },
-            }
-        )
+                duration: 0.5
+            });
 
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
+        // 📌 컨텐츠 전체 등장 (100vh 지나갈 때)
+        gsap.fromTo(contents, {
+            y: -40,
+            opacity: 0,
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: contents,
+                start: "top 80%", // 100vh 지나기 시작할 때
+                toggleActions: "play none none none",
+            },
+        });
+
+        console.log('contents', Array.from(contents.children))
+        // 🔥 개별 컨텐츠 순차적 등장
+        Array.from(contents.children).forEach((content, index) => {
+            console.log(content)
+            gsap.fromTo(content,
+                {
+                    y: -40,
+                    opacity: 0,
+                },
+                {
+                    opacity: 1,
+                    y: 30,
+                    duration: 0.2,
+                    ease: "power2.out",
+                    delay: index * 0.2, // 각 요소에 대한 딜레이 설정
+                    scrollTrigger: {
+                        trigger: content,
+                        start: "top 70%", // 컨텐츠가 보이기 시작할 때부터 애니메이션
+                        toggleActions: "play none none reverse"
+                    },
+                }
+            );
+        })
     }, [])
 
     useEffect(() => {

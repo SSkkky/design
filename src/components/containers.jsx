@@ -7,51 +7,71 @@ import { useLocation } from 'react-router-dom';
 import './containers.scss';
 
 export const Header = (props) => {
-  const { handleSetMenuOpen, onMenuOpen } = props;
+  const { isScrolled, handleSetMenuOpen, onMenuOpen, gsap } = props;
   const { activeMenu } = useAppContext();
   const location = useLocation();
+  const headerRef = useRef();
+  const menuListRef = useRef([]);
 
   useEffect(() => {
     console.log(location)
   }, [location])
 
-  const menuList = ["ABOUT", "SKILLS", "PROJECTS", "CONTECT"]; {
-    const headerRef = useRef();
+  // useEffect(() => {
+  //   const menuLists = Array.from(menuListRef.current.children);
+  //   menuLists.forEach((menu, index) => {
+  //     gsap.to(menuLists, {
+  //       opacity: 1,
+  //       y: 0,
+  //       duration: 0.5,
+  //       stagger: 0.2,
+  //       ease: 'power2.out'
+  //     })
+  //   })
+  // }, [])
 
-    const clickMenuButton = () => {
-      handleSetMenuOpen(onMenuOpen === 'close' ? 'open' : 'close');
-    }
+  const menuList = ["about", "skills", "works", "contect"];
 
-    return (
-      <header ref={headerRef}>
-        <a href="" className='logo'>
-          <h1>SKY</h1>
-        </a>
-        <p className="menu-name">{menuList[activeMenu]}</p>
-        <div className='empty'></div>
-        <a href="" className='contect'>
-          <p>CONTECT</p>
-        </a>
-        <section className={`dimmed ${onMenuOpen}`} onClick={clickMenuButton}></section>
-        <button
-          onClick={clickMenuButton}
-          className={`menuButton ${onMenuOpen}`}
-        >
-          <ul className='menuOpen'>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-          <FontAwesomeIcon className='menuClose' icon={faXmark} />
-        </button>
-        <ul className={`innerMenu ${onMenuOpen}`}>
-          {menuList.map((menu, i) => (
-            <li key={i}>{menu}</li>
-          ))}
-        </ul>
-      </header>
-    );
+  const handleClickMenuBtn = () => {
+    handleSetMenuOpen(onMenuOpen === 'close' ? 'open' : 'close');
   }
+
+  const handleClickMenuList = (e, menu) => {
+    e.preventDefault();
+    gsap.to(window, { duration: 1, scrollTo: `.scrollSection.${menu}` });
+  }
+
+  return (
+    <header ref={headerRef} className={isScrolled ? 'isScroll' : ''}>
+      <a href="" className='logo'>
+        <h1>SKY</h1>
+      </a>
+      <p className="menu-name">{menuList[activeMenu]}</p>
+      <div className='empty'></div>
+      <a href="https://skyportfoilo.vercel.app/" rel="noreferrer" target='_blank' className='contect'>
+        <p>2024</p>
+      </a>
+      <section className={`dimmed ${onMenuOpen}`} onClick={handleClickMenuBtn}></section>
+      <button
+        onClick={handleClickMenuBtn}
+        className={`menuButton ${onMenuOpen}`}
+      >
+        <ul className='menuOpen'>
+          <li className='dot'></li>
+          <li className='dot'></li>
+          <li className='dot'></li>
+        </ul>
+        <FontAwesomeIcon className='menuClose' icon={faXmark} />
+      </button>
+      <ul className={`innerMenu ${onMenuOpen}`} ref={menuListRef} >
+        {menuList.map((menu, i) => (
+          <li key={i}>
+            <a href={`/${menu}`} alt="메뉴를 이동합니다." onClick={(e) => handleClickMenuList(e, menu)}>{menu}</a >
+          </li>
+        ))}
+      </ul>
+    </header>
+  );
 }
 
 export const Float = () => {

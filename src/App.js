@@ -7,10 +7,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { useAppContext } from 'context/AppContext';
+import CanvasCursor from 'components/CanvasCursor';
+import FluidCursor from 'components/FluidCursor';
 import './App.scss';
 
 const App = () => {
   const [onMenuOpen, setMenuOpen] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
   const { activeMenu, setActiveMenu } = useAppContext();
 
   const handleSetMenuOpen = (state) => {
@@ -21,12 +24,37 @@ const App = () => {
       setActiveMenu(i);
     }
 
-    useEffect(()=>{console.log(activeMenu, '== activeMenu')},[activeMenu])
-    const props = { activeMenu, handleSetActiveMenu, onMenuOpen, handleSetMenuOpen, gsap, ScrollTrigger };
+     const handleScroll = () => {
+    if (window.scrollY > 50 && !isScrolled) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
+    useEffect(()=>{
+      window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+    },[])
+
+    useEffect(()=>{
+      console.log(activeMenu, '== activeMenu')},
+    [activeMenu])
+
+    const props = {
+      isScrolled,
+      activeMenu, handleSetActiveMenu,
+      onMenuOpen, handleSetMenuOpen,
+      gsap, ScrollTrigger
+    };
 
   return (
     <Router>
       <Header {...props} />
+      <FluidCursor/>
+      {/* <CanvasCursor/> */}
       <Routes>
         <Route exact path="/" element={<Main {...props} />}></Route>
         <Route exact path="/2024" element={<Y2024/>}></Route>

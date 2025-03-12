@@ -123,6 +123,7 @@
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: auto auto;
+        padding: 4rem 0;
 
         li {
             grid-column: span 1;
@@ -137,10 +138,10 @@
                 transition: 0.2s;
                 content: "";
                 position: absolute;
-                top: -2rem;
+                top: -1.5rem;
                 left: 0;
                 width: 8rem;
-                height: 2rem;
+                height: 1.5rem;
                 border-radius: 0.5rem 1rem 0 0;
                 border-width: 1px 1px 0 1px;
                 border-color: #000;
@@ -153,18 +154,18 @@
             }
 
             p {
-                padding-top: 1rem;
+                padding-top: 0.5rem;
                 padding-left: 1.5rem;
                 position: relative;
 
                 &::after {
                     content: "";
                     width: 4px;
-                    height: 4px;
+                    height: 1px;
                     background-color: #000;
                     border-radius: 1rem;
                     position: absolute;
-                    top: 50%;
+                    top: 10px;
                     left: 0.5rem;
                     transform: translateY(6px);
                 }
@@ -182,12 +183,18 @@
 }
 
 .scrollSection.works {
-    .bg {
-        width: 100vw;
-        height: 100vh;
-        border-radius: 5vw;
-        // background-color: #111;
-        position: absolute;
+    justify-content: flex-end;
+
+    ul {
+        width: 70vw;
+        height: calc(100vh - 48px - 4vw);
+        padding: 1rem;
+        box-sizing: border-box;
+
+        li {
+            color: #fff;
+
+        }
     }
 
     &.onWorks {}
