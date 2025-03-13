@@ -199,3 +199,26 @@
 
     &.onWorks {}
 }
+
+
+.scrollSection.contact {
+    justify-content: flex-end;
+
+    .contents {
+        width: 70vw;
+    }
+
+    b {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 10vw;
+    }
+
+    ul {
+        display: flex;
+        gap: 2rem;
+        font-size: 2rem;
+        flex-direction: column;
+    }
+}

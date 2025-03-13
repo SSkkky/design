@@ -253,7 +253,7 @@ const Works = (props) => {
     )
 }
 
-const Contect = (props) => {
+const Contact = (props) => {
     const { sectionRefs } = props;
     const mainRef = useRef(null);
     const dataIndex = 3;
@@ -263,15 +263,19 @@ const Contect = (props) => {
     }, [mainRef]);
 
     return (
-        <section className="scrollSection"
+        <section className="scrollSection contact"
             ref={mainRef}
             data-index={dataIndex}
         >
-            <b>Contect</b>
-            <p>sonhaneul96@gmail.com</p>
-            <p>01075691925</p>
-            <p>GITHUB</p>
-            <p>VELOG</p>
+            <section className='contents'>
+            <b>Contact<br/>me</b>
+            <ul>
+            <li>sonhaneul96@gmail.com</li>
+            <li>01075691925</li>
+            <li>GITHUB</li>
+            <li>VELOG</li>
+            </ul>
+            </section>
         </section>
     )
 }
@@ -283,7 +287,7 @@ export const Index = (props) => {
             <Main {...props} />
             <Skills {...props} />
             <Works {...props} />
-            <Contect {...props} />
+            <Contact {...props} />
         </main>
     )
 }

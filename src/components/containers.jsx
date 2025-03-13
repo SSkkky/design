@@ -22,6 +22,11 @@ export const Header = (props) => {
     setChangedMenu(!isChangedMenu);
   }, [activeMenu])
 
+  useEffect(()=>{
+    // 메뉴 오픈했을때 스크롤 방지
+      document.body.style.overflowY = onMenuOpen === 'close' ? 'hidden' : 'auto'
+  },[onMenuOpen])
+
   // useEffect(() => {
   //   const menuLists = Array.from(menuListRef.current.children);
   //   menuLists.forEach((menu, index) => {
@@ -35,7 +40,7 @@ export const Header = (props) => {
   //   })
   // }, [])
 
-  const menuList = ["about", "skills", "works", "contect"];
+  const menuList = ["about", "skills", "works", "contact"];
 
   const handleClickMenuBtn = () => {
     handleSetMenuOpen(onMenuOpen === 'close' ? 'open' : 'close');
@@ -57,7 +62,7 @@ export const Header = (props) => {
         </section>
       </section>
       <div className='empty'></div>
-      <a href="https://skyportfoilo.vercel.app/" rel="noreferrer" target='_blank' className='contect'>
+      <a href="https://skyportfoilo.vercel.app/" rel="noreferrer" target='_blank' className='contact'>
         <p>2024</p>
       </a>
       <section className={`dimmed ${onMenuOpen}`} onClick={handleClickMenuBtn}></section>
