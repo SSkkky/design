@@ -104,6 +104,37 @@
     }
 }
 
+@keyframes menuNameBlur {
+    0% {
+        filter: blur(0px);
+    }
+
+    50% {
+        filter: blur(2px)
+    }
+
+    100% {
+        filter: blur(0px);
+    }
+}
+
+@keyframes menuNameParentBlur {
+    0% {
+        filter: contrast(0);
+        background-color: transparent;
+    }
+
+    50% {
+        filter: contrast(200);
+        background-color: transparent;
+    }
+
+    100% {
+        filter: contrast(0);
+        background-color: transparent;
+    }
+}
+
 header {
     width: 96vw;
     height: 48px;
@@ -136,6 +167,16 @@ header {
         text-align: center;
         user-select: none;
         text-transform: uppercase;
+        transition: all 1s;
+
+        &.c1,
+        &.c2 {
+            animation: menuNameParentBlur 1s ease-in-out;
+
+            p {
+                animation: menuNameBlur 1s ease-in-out;
+            }
+        }
     }
 
     .contect {

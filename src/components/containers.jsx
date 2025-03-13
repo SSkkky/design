@@ -12,10 +12,15 @@ export const Header = (props) => {
   const location = useLocation();
   const headerRef = useRef();
   const menuListRef = useRef([]);
+  const [isChangedMenu, setChangedMenu] = useState(false);
 
   useEffect(() => {
     console.log(location)
   }, [location])
+
+  useEffect(() => {
+    setChangedMenu(!isChangedMenu);
+  }, [activeMenu])
 
   // useEffect(() => {
   //   const menuLists = Array.from(menuListRef.current.children);
@@ -46,7 +51,11 @@ export const Header = (props) => {
       <a href="" className='logo'>
         <h1>SKY</h1>
       </a>
-      <p className="menu-name">{menuList[activeMenu]}</p>
+      <section className={`menu-name ${isChangedMenu ? "c1" : "c2"}`}>
+        <section className='inner'>
+          <p>{menuList[activeMenu]}</p>
+        </section>
+      </section>
       <div className='empty'></div>
       <a href="https://skyportfoilo.vercel.app/" rel="noreferrer" target='_blank' className='contect'>
         <p>2024</p>
