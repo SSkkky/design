@@ -40,5 +40,45 @@
                 "API 엔드포인트 생성하여 클라이언트, 서버간 통신 처리"
             ]
         }
+    ],
+    "works": [
+        {
+            "year" : 2024,
+            "name": "피터패트",
+            "position": "프론트엔드 개발, 웹 퍼블리싱"
+        },
+        {
+            "year" : 2023,
+            "name": "개인작",
+            "position": "라이브러리, 프레임워크 활용"
+        },
+        {
+            "year" : 2019,
+            "name": "제우메디컬",
+            "position": "웹 퍼블리싱, 웹 디자인"
+        },
+        {
+            "year" : 2018,
+            "name": "피터패트",
+            "position": "웹 디자인"
+        }
+    ],
+    "contact" : [
+        {
+            "name" : "email",
+            "data" : "sonhaneul96@gmail.com"
+        },
+        {
+            "name" : "phone",
+            "data" : "010.7569.1925"
+        },
+        {
+            "name" : "github",
+            "data" : "https://github.com/SSkkky"
+        },
+        {
+            "name" : "blog",
+            "data" : "https://velog.io/@worte5633/posts"
+        }
     ]
 }

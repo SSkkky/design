@@ -121,17 +121,28 @@
 @keyframes menuNameParentBlur {
     0% {
         filter: contrast(0);
-        background-color: transparent;
     }
 
     50% {
-        filter: contrast(200);
-        background-color: transparent;
+        filter: contrast(200) blur(0.1px);
     }
 
     100% {
+        filter: contrast(0) blur(0.1px);
+    }
+}
+
+@keyframes menuNameParentBlur {
+    0% {
         filter: contrast(0);
-        background-color: transparent;
+    }
+
+    50% {
+        filter: contrast(200) blur(0.1px);
+    }
+
+    100% {
+        filter: contrast(0) blur(0.1px);
     }
 }
 
@@ -157,6 +168,22 @@ header {
         border-color: rgba(0, 0, 0, 1);
     }
 
+    // &.default {
+    //     animation: menuNameParentBlur 1s ease-in-out;
+
+    //     .menu-name p {
+    //         animation: menuNameBlur 1s ease-in-out;
+    //     }
+    // }
+
+    // &.change {
+    //     animation: menuNameParentBlur 1s ease-in-out;
+
+    //     .menu-name p {
+    //         animation: menuNameBlur 1s ease-in-out;
+    //     }
+    // }
+
     .logo {
         display: flex;
         justify-content: center;
@@ -167,16 +194,6 @@ header {
         text-align: center;
         user-select: none;
         text-transform: uppercase;
-        transition: all 1s;
-
-        &.c1,
-        &.c2 {
-            animation: menuNameParentBlur 1s ease-in-out;
-
-            p {
-                animation: menuNameBlur 1s ease-in-out;
-            }
-        }
     }
 
     .contact {

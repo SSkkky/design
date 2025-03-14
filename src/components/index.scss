@@ -184,35 +184,47 @@
 
 .scrollSection.works {
     justify-content: flex-end;
+    padding: 1rem;
+    box-sizing: border-box;
+    height: 300vh;
 
-    ul {
+    .contents {
         width: 70vw;
-        height: calc(100vh - 48px - 4vw);
+        height: 70vh;
         padding: 1rem;
         box-sizing: border-box;
-
-        li {
-            color: #fff;
-
-        }
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    &.onWorks {}
+    article {
+        max-width: 300px;
+        width: calc((100% - 2rem)/ 2);
+        height: calc((100% - 2rem)/ 2);
+        background-color: #fff;
+        padding: 1rem;
+        box-sizing: border-box;
+        border-radius: 2rem;
+    }
 }
 
 
 .scrollSection.contact {
-    justify-content: flex-end;
+    position: relative;
 
-    .contents {
-        width: 70vw;
-    }
-
-    b {
+    .title {
         position: absolute;
-        bottom: 0;
-        right: 0;
-        font-size: 10vw;
+        top: 20vw;
+        left: 50%;
+        transform: translateX(-50%);
+        overflow: hidden;
+
+        b {
+            font-size: 10vw;
+            display: inline-block;
+        }
     }
 
     ul {
@@ -220,5 +232,7 @@
         gap: 2rem;
         font-size: 2rem;
         flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 }

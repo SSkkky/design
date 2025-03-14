@@ -12,20 +12,27 @@ export const Header = (props) => {
   const location = useLocation();
   const headerRef = useRef();
   const menuListRef = useRef([]);
-  const [isChangedMenu, setChangedMenu] = useState(false);
+  const [isChangedMenu, setChangedMenu] = useState('init');
 
   useEffect(() => {
     console.log(location)
   }, [location])
 
   useEffect(() => {
-    setChangedMenu(!isChangedMenu);
+    console.error('activeMenu!!!', activeMenu)
+    if (isChangedMenu === 'init' && activeMenu > 0) {
+      setChangedMenu(true);
+    } else if (isChangedMenu !== 'init') {
+      setChangedMenu(!isChangedMenu);
+    } else {
+      setChangedMenu('init');
+    }
   }, [activeMenu])
 
-  useEffect(()=>{
+  useEffect(() => {
     // 메뉴 오픈했을때 스크롤 방지
-      document.body.style.overflowY = onMenuOpen === 'close' ? 'hidden' : 'auto'
-  },[onMenuOpen])
+    document.body.style.overflowY = onMenuOpen === 'close' ? 'hidden' : 'auto'
+  }, [onMenuOpen])
 
   // useEffect(() => {
   //   const menuLists = Array.from(menuListRef.current.children);
@@ -52,14 +59,14 @@ export const Header = (props) => {
   }
 
   return (
-    <header ref={headerRef} className={isScrolled ? 'isScroll' : ''}>
-      <a href="" className='logo'>
+    <header
+      ref={headerRef}
+      className={`${isScrolled ? 'isScroll' : ''} ${isChangedMenu === 'init' ? "" : (isChangedMenu ? 'change' : 'default')}`}>
+      <a href="" className='logo' alt="로고">
         <h1>SKY</h1>
       </a>
-      <section className={`menu-name ${isChangedMenu ? "c1" : "c2"}`}>
-        <section className='inner'>
-          <p>{menuList[activeMenu]}</p>
-        </section>
+      <section className="menu-name">
+        <p>{menuList[activeMenu]}</p>
       </section>
       <div className='empty'></div>
       <a href="https://skyportfoilo.vercel.app/" rel="noreferrer" target='_blank' className='contact'>

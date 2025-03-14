@@ -4,7 +4,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import myPic from 'assets/image/girl.png';
 import './index.scss';
 import data from 'data/data.json';
-import TextAnimationGSAP from 'components/TextAnimationGSAP';
+import TextAnimationGSAP from 'utils/TextAnimationGSAP';
 
 const Main = (props) => {
     const { sectionRefs, ScrollTrigger, gsap } = props;
@@ -114,7 +114,7 @@ const Skills = (props) => {
                         trigger: item,
                         start: "top 90%",
                         toggleActions: "play none none reverse",
-                        once: true,
+                        scrub: true,
                     }
                 }
             );
@@ -168,64 +168,85 @@ const Works = (props) => {
 
     const mainRef = useRef(null);
     const contentsRef = useRef(null);
+    const liRefs = useRef([]);
     const dataIndex = 2;
 
     useEffect(() => {
         const main = mainRef.current;
         const contents = contentsRef.current;
 
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: main,
-                start: "top bottom",
-                end: "top 50%",
-                scrub: true,
-            },
-        })
-            .to(main, {
-                backgroundColor: 'rgba(0,0,0,0)',
-                duration: 0.5
-            })
-            .to(main, {
-                backgroundColor: 'rgba(0,0,0,1)',
-                duration: 0.5
-            });
+        gsap.fromTo(
+            main,
+            { backgroundColor: "rgba(0, 0, 0, 0)" }, // 초기 상태 (투명)
+            {
+                backgroundColor: "rgba(0, 0, 0, 1)", // 중앙에서 불투명
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: main,
+                    start: "top bottom", // 화면 하단에서 등장할 때
+                    end: "top top",
+                    scrub: true,
+                },
+            }
+        );
+
+        gsap.fromTo(
+            main,
+            { backgroundColor: "rgba(0, 0, 0, 1)" },
+            {
+                backgroundColor: "rgba(0, 0, 0, 0)",
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: main,
+                    start: "bottom 50%", // 스크롤 거의 다함
+                    end: "bottom top", // 화면에서 보이지않음(다올림)
+                    scrub: true,
+                },
+            }
+        );
 
         // 📌 컨텐츠 전체 등장 (100vh 지나갈 때)
-        gsap.fromTo(contents, {
-            y: -40,
-            opacity: 0,
-        }, {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: contents,
-                start: "top 80%", // 100vh 지나기 시작할 때
-                toggleActions: "play none none none",
-            },
-        });
+        // gsap.fromTo(contents, {
+        //     y: -40,
+        //     opacity: 0,
+        // }, {
+        //     y: 0,
+        //     opacity: 1,
+        //     duration: 0.8,
+        //     ease: "power2.out",
+        //     scrollTrigger: {
+        //         trigger: contents,
+        //         start: "top 80%", // 100vh 지나기 시작할 때
+        //         toggleActions: "play none none none",
+        //     },
+        // });
 
-        console.log('contents', Array.from(contents.children))
         // 🔥 개별 컨텐츠 순차적 등장
-        Array.from(contents.children).forEach((content, index) => {
-            console.log(content)
+        Array.from(contents.children).forEach((content, i) => {
             gsap.fromTo(content,
                 {
-                    y: -40,
+                    y: -60,
+                    scale: 0.8,
                     opacity: 0,
+                    rotationX: 20,
+                    transformOrigin: "top left",
                 },
                 {
+                    y: 0,
+                    scale: 1,
                     opacity: 1,
-                    y: 30,
-                    duration: 0.2,
+                    rotationY: 0,
+                    duration: 0.5,
                     ease: "power2.out",
-                    delay: index * 0.2, // 각 요소에 대한 딜레이 설정
                     scrollTrigger: {
                         trigger: content,
-                        start: "top 70%", // 컨텐츠가 보이기 시작할 때부터 애니메이션
-                        toggleActions: "play none none reverse"
+                        start: "top bottom",
+                        end: "top center",
+                        toggleActions: "play none none reverse",
+                        scrub: true, // 부드럽게 변화
+                        delay: i * 0.3,
                     },
                 }
             );
@@ -242,25 +263,85 @@ const Works = (props) => {
             ref={mainRef}
             data-index={dataIndex}
         >
-            <ul ref={contentsRef}>
-                <li>2024 피터패트</li>
-                <li>2024 개인작</li>
-                <li>2020 제우메디컬</li>
-                <li>2018 미스크</li>
-            </ul>
+            <section ref={contentsRef} className='contents'>
+                {data.works.map((data, i) => (
+                    <article key={i} data-index={i}>
+                        <section>
+                            <b className='year'>{data.year}</b>
+                            <section>
+                                <p className='name'>{data.name}</p>
+                                <p className='position'>{data.position}</p>
+                            </section>
+                        </section>
+                    </article>
+                ))
+                }
+            </section>
             <section className='bg'></section>
         </section>
     )
 }
 
 const Contact = (props) => {
-    const { sectionRefs } = props;
+    const { gsap, sectionRefs } = props;
     const mainRef = useRef(null);
+    const titleRef = useRef(null);
+    const ulistRef = useRef(null);
+    const listRef = useRef([]);
     const dataIndex = 3;
 
     useEffect(() => {
         if (mainRef && mainRef.current) sectionRefs.current[dataIndex] = mainRef.current;
     }, [mainRef]);
+
+    useEffect(() => {
+        const main = mainRef.current;
+        const title = titleRef.current;
+        const titleText = title.children[0];
+        const lists = listRef.current;
+        const ulist = ulistRef.current;
+
+        gsap.fromTo(titleText,
+            {
+                transform: "translateY(9vw)",
+                opacity: 0.5,
+            },
+            {
+                transform: "translateY(0)",
+                opacity: 1,
+                duration: 0.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: main,
+                    start: "top center",
+                    end: "bottom bottom",
+                    toggleActions: "play none none reverse",
+                    scrub: true, // 부드럽게 변화
+                },
+            }
+        );
+
+        gsap.fromTo(ulist,
+            {
+                opacity: 0,
+                transform: "translateY(-7vw)",
+            },
+            {
+                transform: "translateY(0)",
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: ulist,
+                    start: "top 70%",
+                    end: "bottom bottom",
+                    toggleActions: "play none none reverse",
+                    scrub: true,
+                },
+            }
+        );
+
+    }, [])
 
     return (
         <section className="scrollSection contact"
@@ -268,13 +349,25 @@ const Contact = (props) => {
             data-index={dataIndex}
         >
             <section className='contents'>
-            <b>Contact<br/>me</b>
-            <ul>
-            <li>sonhaneul96@gmail.com</li>
-            <li>01075691925</li>
-            <li>GITHUB</li>
-            <li>VELOG</li>
-            </ul>
+                <section className='title' ref={titleRef}>
+                    <b>Contact</b>
+                </section>
+                <ul ref={ulistRef}>
+                    {data.contact.slice(0, 2).map((item, i) => (
+                        <li key={i}>
+                            <p ref={(el) => listRef.current[i] = el}>{item.data}</p>
+                        </li>
+                    ))}
+                    <li>
+                        {data.contact.slice(2, 4).map((item, i) => (
+                            <a key={i} href={item.data} alt={item.name}
+                                target="_blank" rel="noreferrer"
+                                ref={(el) => listRef.current[i + 2] = el}>
+                                {item.name}
+                            </a>
+                        ))}
+                    </li>
+                </ul>
             </section>
         </section>
     )

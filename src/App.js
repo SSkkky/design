@@ -7,8 +7,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { useAppContext } from 'context/AppContext';
-import CanvasCursor from 'components/CanvasCursor';
-import FluidCursor from 'components/FluidCursor';
+import CanvasCursor from 'utils/CanvasCursor';
+import FluidCursor from 'utils/FluidCursor';
+import { setFavicon } from 'utils/setFavicon';
 import './App.scss';
 
 const App = () => {
@@ -33,15 +34,28 @@ const App = () => {
   };
 
     useEffect(()=>{
+      // 파비콘
+    const favicon = document.getElementById('favicon');
+    if (!favicon) return;
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const updateFavicon = () => {
+      console.log(darkScheme.matches)
+      favicon.href = darkScheme.matches
+      ? '/favicon_light.ico'
+      : '/favicon_dark.ico';
+    };
+
+    updateFavicon();
+    darkScheme.addEventListener('change', updateFavicon);
+
+      // 스크롤 여부 감지
       window.addEventListener('scroll', handleScroll);
     return () => {
+      darkScheme.removeEventListener('change', updateFavicon);
       window.removeEventListener('scroll', handleScroll);
     }
     },[])
-
-    useEffect(()=>{
-      console.log(activeMenu, '== activeMenu')},
-    [activeMenu])
 
     const props = {
       isScrolled,
