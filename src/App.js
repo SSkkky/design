@@ -9,7 +9,6 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { useAppContext } from 'context/AppContext';
 import CanvasCursor from 'utils/CanvasCursor';
 import FluidCursor from 'utils/FluidCursor';
-import { setFavicon } from 'utils/setFavicon';
 import './App.scss';
 
 const App = () => {

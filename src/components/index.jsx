@@ -343,6 +343,10 @@ const Contact = (props) => {
 
     }, [])
 
+    const handleClickIconBtn = (link) => {
+        window.open(link, '_blank');
+    }
+
     return (
         <section className="scrollSection contact"
             ref={mainRef}
@@ -358,13 +362,10 @@ const Contact = (props) => {
                             <p ref={(el) => listRef.current[i] = el}>{item.data}</p>
                         </li>
                     ))}
-                    <li>
+                    <li className='logos'>
                         {data.contact.slice(2, 4).map((item, i) => (
-                            <a key={i} href={item.data} alt={item.name}
-                                target="_blank" rel="noreferrer"
-                                ref={(el) => listRef.current[i + 2] = el}>
-                                {item.name}
-                            </a>
+                            <button ref={(el) => listRef.current[i + 2] = el}
+                                onClick={() => handleClickIconBtn(item.data)} className={`logo_${item.name}`} />
                         ))}
                     </li>
                 </ul>

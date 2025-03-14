@@ -215,14 +215,10 @@
     position: relative;
 
     .title {
-        position: absolute;
-        top: 20vw;
-        left: 50%;
-        transform: translateX(-50%);
         overflow: hidden;
 
         b {
-            font-size: 10vw;
+            font-size: 7vw;
             display: inline-block;
         }
     }
@@ -234,5 +230,26 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
+        margin-top: 4vw;
+
+        .logos {
+            button {
+                width: 40px;
+                height: 40px;
+                background-size: cover;
+                margin: 0.5rem;
+                padding: 0;
+            }
+
+            .logo_github {
+                background-image: url('../assets/image/github.png');
+            }
+
+            .logo_blog {
+                background-image: url('../assets/image/velog.webp');
+            }
+        }
+
+
     }
 }
