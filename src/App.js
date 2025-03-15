@@ -11,6 +11,8 @@ import CanvasCursor from 'utils/CanvasCursor';
 import FluidCursor from 'utils/FluidCursor';
 import './App.scss';
 
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
 const App = () => {
   const [onMenuOpen, setMenuOpen] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,7 +62,7 @@ const App = () => {
       isScrolled,
       activeMenu, handleSetActiveMenu,
       onMenuOpen, handleSetMenuOpen,
-      gsap, ScrollTrigger
+      gsap, ScrollTrigger, ScrollToPlugin,
     };
 
   return (

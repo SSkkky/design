@@ -55,7 +55,7 @@ export const Header = (props) => {
 
   const handleClickMenuList = (e, menu) => {
     e.preventDefault();
-    gsap.to(window, { duration: 1, scrollTo: `.scrollSection.${menu}` });
+    gsap.to(window, { duration: 1, scrollTo: { y: `.scrollSection.${menu}` } });
   }
 
   return (

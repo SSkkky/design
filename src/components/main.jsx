@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Float } from 'components/containers.jsx';
 import { Index } from 'components/index.jsx';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export const Main = (props) => {
     const sectionRefs = useRef([]);

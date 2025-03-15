@@ -186,7 +186,7 @@
     justify-content: flex-end;
     padding: 1rem;
     box-sizing: border-box;
-    height: 300vh;
+    background-color: #000;
 
     .contents {
         width: 70vw;
@@ -212,25 +212,45 @@
 
 
 .scrollSection.contact {
-    position: relative;
+    padding: 4vw;
+    box-sizing: border-box;
 
     .title {
-        overflow: hidden;
+        font-family: "Akira";
+        font-size: 7vw;
 
-        b {
+        section {
+            overflow: hidden;
             font-size: 7vw;
-            display: inline-block;
+        }
+
+        .line {
+            width: calc(100% - 18vw);
+            height: 2px;
+            background-color: #000;
+            transform-origin: left;
+        }
+
+        .contact {
+            -webkit-text-stroke: 1px #000000;
+            color: #fff;
+        }
+
+        .me {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
 
     ul {
         display: flex;
         gap: 2rem;
-        font-size: 2rem;
+        font-size: 1.5rem;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
         text-align: center;
-        margin-top: 4vw;
+        margin-top: 10vw;
 
         .logos {
             button {
@@ -249,7 +269,5 @@
                 background-image: url('../assets/image/velog.webp');
             }
         }
-
-
     }
 }

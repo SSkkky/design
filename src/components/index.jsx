@@ -4,7 +4,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import myPic from 'assets/image/girl.png';
 import './index.scss';
 import data from 'data/data.json';
-import TextAnimationGSAP from 'utils/TextAnimationGSAP';
+import AnimatedText from 'utils/TextAnimationGSAP';
 
 const Main = (props) => {
     const { sectionRefs, ScrollTrigger, gsap } = props;
@@ -174,54 +174,32 @@ const Works = (props) => {
     useEffect(() => {
         const main = mainRef.current;
         const contents = contentsRef.current;
+        const contact = document.querySelector('.scrollSection.contact');
 
-        gsap.fromTo(
-            main,
-            { backgroundColor: "rgba(0, 0, 0, 0)" }, // 초기 상태 (투명)
-            {
-                backgroundColor: "rgba(0, 0, 0, 1)", // 중앙에서 불투명
-                duration: 1,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: main,
-                    start: "top bottom", // 화면 하단에서 등장할 때
-                    end: "top top",
-                    scrub: true,
-                },
-            }
-        );
 
-        gsap.fromTo(
-            main,
-            { backgroundColor: "rgba(0, 0, 0, 1)" },
-            {
-                backgroundColor: "rgba(0, 0, 0, 0)",
-                duration: 1,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: main,
-                    start: "bottom 50%", // 스크롤 거의 다함
-                    end: "bottom top", // 화면에서 보이지않음(다올림)
-                    scrub: true,
-                },
-            }
-        );
-
-        // 📌 컨텐츠 전체 등장 (100vh 지나갈 때)
-        // gsap.fromTo(contents, {
-        //     y: -40,
-        //     opacity: 0,
-        // }, {
-        //     y: 0,
-        //     opacity: 1,
-        //     duration: 0.8,
-        //     ease: "power2.out",
-        //     scrollTrigger: {
-        //         trigger: contents,
-        //         start: "top 80%", // 100vh 지나기 시작할 때
-        //         toggleActions: "play none none none",
-        //     },
-        // });
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: main,
+                start: "top top", // 섹션이 화면 상단에 닿을 때 시작
+                end: "+=300%", // 핀 고정 지속 거리 (스크롤의 300%)
+                pin: true, // 배경 고정
+                scrub: true, // 스크롤에 따라 애니메이션 진행
+                onLeave: () => {
+                    gsap.to(window, {
+                        scrollTo: {
+                            y: contact,
+                            autoKill: false
+                        },
+                        duration: 2, // 이동 시간
+                        ease: "power2.inOut"
+                    });
+                }
+            },
+        })
+            .fromTo(contents,
+                { opacity: 0, transform: "translateY(50px)" },
+                { opacity: 1, transform: "translateY(0)", duration: 1 }
+            );
 
         // 🔥 개별 컨텐츠 순차적 등장
         Array.from(contents.children).forEach((content, i) => {
@@ -251,6 +229,22 @@ const Works = (props) => {
                 }
             );
         })
+
+        // contact로 스크롤
+        // ScrollTrigger.create({
+        //     trigger: contact,
+        //     start: "90% bottom", // 90% 지점에 도달 시 활성화
+        //     onEnter: () => {
+        //         gsap.to(window, {
+        //             scrollTo: {
+        //                 y: contact,
+        //                 autoKill: false  // 사용자의 추가 스크롤 동작 무시
+        //             },
+        //             duration: 2,
+        //             ease: "power2.inOut"
+        //         });
+        //     }
+        // });
     }, [])
 
     useEffect(() => {
@@ -283,8 +277,9 @@ const Works = (props) => {
 }
 
 const Contact = (props) => {
-    const { gsap, sectionRefs } = props;
+    const { gsap, sectionRefs, ScrollTrigger, handleSetActiveMenu } = props;
     const mainRef = useRef(null);
+    const lineRef = useRef(null);
     const titleRef = useRef(null);
     const ulistRef = useRef(null);
     const listRef = useRef([]);
@@ -296,50 +291,69 @@ const Contact = (props) => {
 
     useEffect(() => {
         const main = mainRef.current;
+        const line = lineRef.current;
         const title = titleRef.current;
         const titleText = title.children[0];
         const lists = listRef.current;
         const ulist = ulistRef.current;
 
-        gsap.fromTo(titleText,
+        gsap.fromTo(ulist,
             {
-                transform: "translateY(9vw)",
-                opacity: 0.5,
+                opacity: 0,
+                transform: "translateY(10vw)",
             },
             {
+                duration: 0.5,
                 transform: "translateY(0)",
                 opacity: 1,
-                duration: 0.5,
-                ease: "power2.out",
+                ease: 'power2.out',
                 scrollTrigger: {
                     trigger: main,
-                    start: "top center",
+                    start: "top 30%",
                     end: "bottom bottom",
                     toggleActions: "play none none reverse",
-                    scrub: true, // 부드럽게 변화
                 },
             }
         );
 
-        gsap.fromTo(ulist,
+        gsap.fromTo(line,
             {
-                opacity: 0,
-                transform: "translateY(-7vw)",
+                transform: "scaleX(0)",
             },
             {
-                transform: "translateY(0)",
-                opacity: 1,
-                duration: 1,
+                transform: "scaleX(1)",
+                duration: 0.5,
                 ease: 'power2.out',
                 scrollTrigger: {
-                    trigger: ulist,
-                    start: "top 70%",
-                    end: "bottom bottom",
+                    trigger: title,
+                    start: "top center",
                     toggleActions: "play none none reverse",
-                    scrub: true,
                 },
             }
         );
+
+        // work로 스크롤
+        const works = document.querySelector('.scrollSection.works');
+        ScrollTrigger.create({
+            trigger: main,
+            start: "top 50%",
+            onLeaveBack: () => { // 트리거 영역을 벗어날 때
+                const worksTop = window.innerHeight * 2;
+                console.log(worksTop)
+                gsap.to(window, {
+                    scrollTo: {
+                        y: worksTop,
+                        autoKill: false
+                    },
+                    duration: 3,
+                    ease: "power2.inOut"
+                });
+
+                // setTimeout(()=>{
+                //     handleSetActiveMenu(3);
+                // },1000)
+            }
+        });
 
     }, [])
 
@@ -354,7 +368,23 @@ const Contact = (props) => {
         >
             <section className='contents'>
                 <section className='title' ref={titleRef}>
-                    <b>Contact</b>
+                    <section className='contact'>
+                        <AnimatedText
+                            text="CONTACT"
+                            start="top 80%"
+                            end="bottom center"
+                            size="7vw"
+                        />
+                    </section>
+                    <section className="me">
+                        <p className='line' ref={lineRef}></p>
+                        <AnimatedText
+                            text="ME"
+                            start="top center"
+                            end="bottom 30%"
+                            size="7vw"
+                        />
+                    </section>
                 </section>
                 <ul ref={ulistRef}>
                     {data.contact.slice(0, 2).map((item, i) => (
@@ -365,7 +395,7 @@ const Contact = (props) => {
                     <li className='logos'>
                         {data.contact.slice(2, 4).map((item, i) => (
                             <button ref={(el) => listRef.current[i + 2] = el}
-                                onClick={() => handleClickIconBtn(item.data)} className={`logo_${item.name}`} />
+                                onClick={() => handleClickIconBtn(item.data)} className={`logo_${item.name}`} key={i} />
                         ))}
                     </li>
                 </ul>
