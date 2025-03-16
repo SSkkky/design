@@ -10,7 +10,6 @@ const Main = (props) => {
     const { sectionRefs, ScrollTrigger, gsap } = props;
     const [onMouseCover, setMouseCover] = useState(false);
     const mainRef = useRef(null);
-    const mainWrapperRef = useRef(null);
     const titleRef = useRef(null);
     const subTitleRef = useRef(null);
     const introRef = useRef(null);
@@ -20,79 +19,24 @@ const Main = (props) => {
         const main = mainRef.current;
         const title = titleRef.current;
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: main,
-                start: "0 0",
-                end: "+=300%",
-                pin: true,
-                anticipatePin: 1,
-                scrub: 0.5,
-                toggleActions: "restart none none reverse", // 조건 변경
-                ease: "power2.out",
-            },
-        })
-
-        // 시작시 제목 애니메이션
-        tl.fromTo(title,
+        gsap.fromTo(
+            title,
             {
-                transform: "translate(-50%, -50%)",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                fontSize: "12vw"
+                y: 0,
+                opacity: 1,
             },
             {
-                transform: "translate(-50%, -70%)",
-                fontSize: "4vw",
-                duration: 0.3,
-            },
-            0
+                y: '20vh',
+                opacity: 0,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: main,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true,
+                },
+            }
         );
-
-        tl.to(title,
-            {
-                color: "red",
-                x: "-33vw",
-                duration: 0.1,
-            },
-            0.3 // 이전 duration 종료 후
-        );
-
-        tl.to(title,
-            {
-                color: "green",
-                duration: 0.4,
-            },
-            0.4 // 이전 duration 종료 후
-        );
-
-        tl.to(title,
-            {
-                color: "blue",
-                duration: 0.2,
-            },
-            0.8 // 이전 duration 종료 후
-        );
-
-        // gsap.fromTo(
-        //     title,
-        //     {
-        //         y: 0,
-        //         opacity: 1,
-        //     },
-        //     {
-        //         y: '20vh',
-        //         opacity: 0,
-        //         ease: 'power2.out',
-        //         scrollTrigger: {
-        //             trigger: main,
-        //             start: 'top top',
-        //             end: 'bottom top',
-        //             scrub: true,
-        //         },
-        //     }
-        // );
 
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -117,30 +61,27 @@ const Main = (props) => {
 
     return (
         <section className="scrollSection main" ref={mainRef} data-index={dataIndex}>
-            <b className="main-title" ref={titleRef}>haneul.</b>
-            <section>
-                <p>HELLO,<br />I'M<br /><br />a </p>
-            </section>
-            {/* <article className='sub-title' ref={subTitleRef}>
-                    <p>2024-25</p>
-                    <p>WEB PORTFOLIO</p>
-                </article>
-                <section className='Introduction' ref={introRef}>
-                    <article>
-                        <b>HELLO WORLD!</b>
-                        <section>
-                            <p>안녕하세요! 저는 1년 차 웹 프론트엔드 개발자이자 웹 퍼블리셔로 활동 중인 손하늘입니다. </p>
-                            <p>웹 사이트와 웹 애플리케이션 개발에 대한 열정으로, 직관적이고 반응형인 디자인을 구현하는 데 집중하고 있습니다.</p>
-                        </section>
-                    </article>
-                    <img src={myPic} alt='image' />
-                    <section className={`cover ${onMouseCover ? 'mouseOver' : ''}`}
-                        onMouseOver={handleMouseOverCover}
-                        onMouseOut={handleMouseOutCover}
-                    >
-                        <button onClick={handleClickNextButton}><FontAwesomeIcon className='menuClose' icon={faArrowRight} /></button>
+            <b className="main-title" ref={titleRef}>dev.</b>
+            <article className='sub-title' ref={subTitleRef}>
+                <p>2024-25</p>
+                <p>WEB PORTFOLIO</p>
+            </article>
+            <section className='Introduction' ref={introRef}>
+                <article>
+                    <b>HELLO WORLD!</b>
+                    <section>
+                        <p>안녕하세요! 저는 1년 차 웹 프론트엔드 개발자이자 웹 퍼블리셔로 활동 중인 손하늘입니다. </p>
+                        <p>웹 사이트와 웹 애플리케이션 개발에 대한 열정으로, 직관적이고 반응형인 디자인을 구현하는 데 집중하고 있습니다.</p>
                     </section>
-                </section> */}
+                </article>
+                <img src={myPic} alt='image' />
+                <section className={`cover ${onMouseCover ? 'mouseOver' : ''}`}
+                    onMouseOver={handleMouseOverCover}
+                    onMouseOut={handleMouseOutCover}
+                >
+                    <button onClick={handleClickNextButton}><FontAwesomeIcon className='menuClose' icon={faArrowRight} /></button>
+                </section>
+            </section>
         </section>
     )
 }

@@ -13,13 +13,14 @@
 }
 
 .scrollSection.main {
-    background-color: #ddd;
-
     .main-title {
         font-family: 'ZillaSlab';
+        font-size: 9vw;
         font-weight: 700;
         position: absolute;
         z-index: 1;
+        top: 30vh;
+        left: 4vw;
     }
 
     .sub-title {

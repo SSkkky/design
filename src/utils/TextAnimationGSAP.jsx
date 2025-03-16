@@ -4,7 +4,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AnimatedText = ({ text, trigger, start, end, size = '1rem' }) => {
+const AnimatedText = ({
+    text, trigger, start, end,
+    size = '1rem', duration = 0.3, stagger = 0.1
+}) => {
     const textRef = useRef([]);
 
     useEffect(() => {
@@ -23,7 +26,7 @@ const AnimatedText = ({ text, trigger, start, end, size = '1rem' }) => {
         tl.fromTo(
             letters,
             { opacity: 0.5, y: size },
-            { opacity: 1, y: 0, duration: 0.3, stagger: 0.1, ease: "power2.out" }
+            { opacity: 1, y: 0, duration: duration, stagger: stagger, ease: "power2.out" }
         );
 
         ScrollTrigger.refresh();
