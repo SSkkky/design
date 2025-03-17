@@ -9,93 +9,207 @@ import AnimatedText from 'utils/TextAnimationGSAP';
 const Main = (props) => {
     const { sectionRefs, ScrollTrigger, gsap } = props;
     const [onMouseCover, setMouseCover] = useState(false);
+
+    const mainTimeline = useRef(null);
     const mainRef = useRef(null);
     const mainWrapperRef = useRef(null);
     const titleRef = useRef(null);
-    const subTitleRef = useRef(null);
-    const introRef = useRef(null);
+    const helloTextRef = useRef([]);
+    const jobTextRef = useRef([]);
+    const job1TextAniRef = useRef(null);
+    const job2TextAniRef = useRef(null);
+    const job3TextAniRef = useRef(null);
     const dataIndex = 0;
 
     useEffect(() => {
+        let mainTl = mainTimeline.current;
         const main = mainRef.current;
         const title = titleRef.current;
+        const [helloTexts, helloText1, helloText2, helloText3] = helloTextRef.current;
+        const [jobTexts, jobText1, jobText2, jobText3] = jobTextRef.current;
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: main,
-                start: "0 0",
-                end: "+=300%",
-                pin: true,
-                anticipatePin: 1,
-                scrub: 0.5,
-                toggleActions: "restart none none reverse", // 조건 변경
-                ease: "power2.out",
-            },
-        })
+        if (main) {
+            mainTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: main,
+                    start: "0 0",
+                    end: "+=300%",
+                    pin: true,
+                    anticipatePin: 1,
+                    scrub: 0.5,
+                    toggleActions: "restart none none reverse", // 조건 변경
+                    ease: "power2.out",
+                },
+            })
+        }
 
         // 시작시 제목 애니메이션
-        tl.fromTo(title,
+        mainTl.fromTo(title,
             {
-                transform: "translate(-50%, -50%)",
                 position: "absolute",
-                top: "50%",
-                left: "50%",
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
                 fontSize: "12vw"
             },
             {
-                transform: "translate(-50%, -70%)",
-                fontSize: "4vw",
+                top: '15vw',
+                fontSize: "5vw",
                 duration: 0.3,
             },
             0
         );
 
-        tl.to(title,
+        // 왼쪽으로 타이틀 이동
+        mainTl.to(title,
             {
                 color: "red",
-                x: "-33vw",
+                top: '19vw',
+                left: '26vw',
                 duration: 0.1,
             },
             0.3 // 이전 duration 종료 후
         );
+        mainTl.fromTo(helloTexts,
+            {
+                position: 'absolute',
+                left: '10vw',
+                top: '20vw',
+                opacity: 0,
+            },
+            {
+                top: '10vw',
+                opacity: 1,
+                duration: 0.1,
+            },
+            0.3
+        );
+        mainTl.fromTo(helloText1,
+            {
+                opacity: 0,
+            },
+            {
+                opacity: 1,
+                duration: 0.1,
+            },
+            0.3
+        );
+        mainTl.fromTo(helloText2,
+            {
+                opacity: 0,
+            },
+            {
+                opacity: 1,
+                duration: 0.1,
+            },
+            0.35
+        );
+        mainTl.fromTo(helloText3,
+            {
+                opacity: 0,
+            },
+            {
+                opacity: 1,
+                duration: 0.1,
+            },
+            0.4
+        );
 
-        tl.to(title,
+
+        // 직업 1 텍스트 등장
+        mainTl.to(title,
             {
                 color: "green",
-                duration: 0.4,
+                duration: 0.3,
             },
-            0.4 // 이전 duration 종료 후
+            0.4
+        );
+        mainTl.fromTo(jobTexts,
+            {
+                position: 'absolute',
+                left: '10vw',
+                top: '50vw',
+                opacity: 0,
+            },
+            {
+                top: '30vw',
+                opacity: 1,
+                duration: 0.1,
+            },
+            0.4
+        );
+        if (job1TextAniRef.current) {
+            job1TextAniRef.current.createAnimation(mainTl, 0.4);
+        }
+        mainTl.to(jobText1,
+            {
+                y: '-=20',
+                opacity: 0,
+                duration: 0.1,
+            },
+            0.85
         );
 
-        tl.to(title,
+        mainTl.to(title,
             {
                 color: "blue",
-                duration: 0.2,
+                duration: 0.3,
             },
-            0.8 // 이전 duration 종료 후
+            0.7 // 이전 duration 종료 후
+        );
+        mainTl.to(jobTexts,
+            {
+                top: '18vw',
+                duration: 0.05,
+            },
+            1
+        );
+        if (job2TextAniRef.current) {
+            job2TextAniRef.current.createAnimation(mainTl, 1);
+        }
+        mainTl.fromTo(jobText2,
+            {
+                opacity: 0,
+            },
+            {
+                opacity: 1,
+                duration: 0.05,
+            },
+            1
         );
 
-        // gsap.fromTo(
-        //     title,
-        //     {
-        //         y: 0,
-        //         opacity: 1,
-        //     },
-        //     {
-        //         y: '20vh',
-        //         opacity: 0,
-        //         ease: 'power2.out',
-        //         scrollTrigger: {
-        //             trigger: main,
-        //             start: 'top top',
-        //             end: 'bottom top',
-        //             scrub: true,
-        //         },
-        //     }
-        // );
+
+        mainTl.to(jobText2,
+            {
+                y: '-=20',
+                opacity: 0,
+                duration: 0.1,
+            }, 1.5
+        );
+        mainTl.to(jobTexts,
+            {
+                top: '6vw',
+                duration: 0.05,
+            },
+            1.6
+        );
+        if (job3TextAniRef.current) { // Designer
+            job3TextAniRef.current.createAnimation(mainTl, 1.6);
+        }
+        mainTl.fromTo(jobText3,
+            {
+                opacity: 0,
+            },
+            {
+                opacity: 1,
+                duration: 0.05,
+            },
+            1.5
+        );
 
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+            mainTl.kill();
         };
     }, []);
 
@@ -103,44 +217,44 @@ const Main = (props) => {
         if (mainRef && mainRef.current) sectionRefs.current[dataIndex] = mainRef.current;
     }, [mainRef]);
 
-    const handleMouseOverCover = () => {
-        !onMouseCover && setMouseCover(true);
-    }
-
-    const handleMouseOutCover = () => {
-        onMouseCover && setMouseCover(false);
-    }
-
-    const handleClickNextButton = () => {
-        gsap.to(window, { duration: 1, scrollTo: ".scrollSection.skills" });
-    }
-
     return (
         <section className="scrollSection main" ref={mainRef} data-index={dataIndex}>
             <b className="main-title" ref={titleRef}>haneul.</b>
-            <section>
-                <p>HELLO,<br />I'M<br /><br />a </p>
+            <section className='bottomSec-ani-text'
+                ref={(el) => helloTextRef.current[0] = el}>
+                <p ref={(el) => helloTextRef.current[1] = el}>HELLO,</p>
+                <p ref={(el) => helloTextRef.current[2] = el}>I'M</p>
+                <p ref={(el) => helloTextRef.current[3] = el}>A CREATIVE</p>
             </section>
-            {/* <article className='sub-title' ref={subTitleRef}>
-                    <p>2024-25</p>
-                    <p>WEB PORTFOLIO</p>
-                </article>
-                <section className='Introduction' ref={introRef}>
-                    <article>
-                        <b>HELLO WORLD!</b>
-                        <section>
-                            <p>안녕하세요! 저는 1년 차 웹 프론트엔드 개발자이자 웹 퍼블리셔로 활동 중인 손하늘입니다. </p>
-                            <p>웹 사이트와 웹 애플리케이션 개발에 대한 열정으로, 직관적이고 반응형인 디자인을 구현하는 데 집중하고 있습니다.</p>
-                        </section>
-                    </article>
-                    <img src={myPic} alt='image' />
-                    <section className={`cover ${onMouseCover ? 'mouseOver' : ''}`}
-                        onMouseOver={handleMouseOverCover}
-                        onMouseOut={handleMouseOutCover}
-                    >
-                        <button onClick={handleClickNextButton}><FontAwesomeIcon className='menuClose' icon={faArrowRight} /></button>
-                    </section>
-                </section> */}
+            <section className="bottomSec-ani-job" ref={(el) => jobTextRef.current[0] = el}>
+                <div className="cover" ref={(el) => jobTextRef.current[1] = el}>
+                    <AnimatedText
+                        text={"Developer"}
+                        ref={job1TextAniRef}
+                        size='10vw'
+                        duration={0.07}
+                        stagger={0.05}
+                    />
+                </div>
+                <div className="cover" ref={(el) => jobTextRef.current[2] = el}>
+                    <AnimatedText
+                        text={"Publisher"}
+                        ref={job2TextAniRef}
+                        size='10vw'
+                        duration={0.07}
+                        stagger={0.05}
+                    />
+                </div>
+                <div className="cover" ref={(el) => jobTextRef.current[3] = el}>
+                    <AnimatedText
+                        text={"Designer"}
+                        ref={job3TextAniRef}
+                        size='10vw'
+                        duration={0.07}
+                        stagger={0.05}
+                    />
+                </div>
+            </section>
         </section>
     )
 }
@@ -356,6 +470,7 @@ const Works = (props) => {
 const Contact = (props) => {
     const { gsap, sectionRefs, ScrollTrigger, handleSetActiveMenu } = props;
     const [isAnimating, setIsAnimating] = useState(false); // 스크롤 애니메이션 중인지 여부
+    const mainTimeline = useRef(null);
     const mainRef = useRef(null);
     const lineRef = useRef(null);
     const titleRef = useRef(null);
@@ -368,6 +483,7 @@ const Contact = (props) => {
     }, [mainRef]);
 
     useEffect(() => {
+        let mainTl = mainTimeline.current;
         const main = mainRef.current;
         const line = lineRef.current;
         const title = titleRef.current;
@@ -375,41 +491,41 @@ const Contact = (props) => {
         const lists = listRef.current;
         const ulist = ulistRef.current;
 
-        if (!main) return;
+        if (main) {
+            mainTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: main,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.5,
+                    toggleActions: "restart none none reverse",
+                    ease: "power2.out",
+                },
+            })
+        }
 
-        gsap.fromTo(ulist,
+        mainTl.fromTo(ulist,
             {
                 opacity: 0,
                 transform: "translateY(10vw)",
             },
             {
-                duration: 0.5,
-                transform: "translateY(0)",
                 opacity: 1,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: main,
-                    start: "top 30%",
-                    end: "bottom bottom",
-                    toggleActions: "play none none reverse",
-                },
-            }
+                transform: "translateY(0)",
+                duration: 0.5,
+            },
+            0
         );
 
-        gsap.fromTo(line,
+        mainTl.fromTo(line,
             {
                 transform: "scaleX(0)",
             },
             {
                 transform: "scaleX(1)",
                 duration: 0.5,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: title,
-                    start: "top center",
-                    toggleActions: "play none none reverse",
-                },
-            }
+            },
+            0.5
         );
 
         // work로 스크롤
