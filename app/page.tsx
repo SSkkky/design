@@ -1,5 +1,8 @@
 'use client'
 
+import React from 'react'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import SectionIntro from '@/components/SectionIntro'
 import SectionAbout from '@/components/SectionAbout'
 import SectionProjects from '@/components/SectionProjects'
@@ -11,9 +14,11 @@ export default function Home() {
 
   return (
     <>
+      <Header/>
       <SectionIntro />
       <SectionAbout />
       <SectionProjects />
+      <Footer/>
       {segments[0] === 'projects' && segments[1] && <ProjectModal />}
     </>
   )
