@@ -17,7 +17,7 @@ export default function SectionIntro() {
         duration: 1,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 80%',
+          start: 'top 20%',
         },
       }
     )
@@ -25,7 +25,7 @@ export default function SectionIntro() {
 
   return (
     <section ref={sectionRef} className="h-screen flex items-center justify-center bg-black text-white">
-      <h1 className="text-5xl font-bold">안녕하세요, 홍길동입니다</h1>
+      <h1 className="text-8xl font-bold">HANEUL</h1>
     </section>
   )
 }
