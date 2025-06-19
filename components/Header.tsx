@@ -4,17 +4,27 @@ import { useRouter } from 'next/navigation';
 import gsap from 'gsap';   
 
 export default function Header() { 
+  const router = useRouter();
+
+  const clickLogoHandler = () => {
+    router.push('/');  
+  }
+
   return (
-    <header className="fixed top-0 left-0 w-full bg-white text-black shadow-md z-50">
-        <h1 className="text-2xl font-bold p-4">
-            <span>Sky Archive</span>
+    <header className="fixed flex items-center top-0 left-0 w-full bg-white text-black z-50 font-bold">
+      <a className='flex-1'>
+        <h1 className="text-3xl p-4" >
+            <span className='cursor-pointer' onClick={clickLogoHandler}>Sky Archive</span>
         </h1>
-        <ul>
-            <li>INTRO</li>
-            <li>ABOUT</li>
-            <li>PROJECTS</li>
+      </a>
+        <ul className='p-4 flex gap-4 text-xl'>
+            <li className='text-gray-400'>INTRO</li>
+            <li className='text-gray-400'>ABOUT</li>
+            <li className='text-gray-400'>PROJECTS</li>
         </ul>
-        <a href="mailto:sonhaneul96@gmail.com">sonhaneul96@gmail.com</a>
+        <div className='flex-1 text-right '>
+          <a href="mailto:sonhaneul96@gmail.com" className='p-4 text-xl'>sonhaneul96@gmail.com</a>
+        </div>
     </header>
   );
 }
