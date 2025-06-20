@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <>
-      <Header isIntro={isIntro}/>
+      <Header isIntro={false}/>
       <SectionIntro targetRef={targetRef}/>
       <SectionAbout />
       <SectionProjects />
