@@ -2,8 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import gsap from 'gsap';   
+import { useEffect } from 'react';
 
-export default function Header() { 
+export default function Header({isIntro}) { 
   const router = useRouter();
 
   const clickLogoHandler = () => {
@@ -11,9 +12,9 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed flex items-center top-0 left-0 w-full bg-white text-black z-50 font-bold">
+    <header className="fixed flex items-center top-0 left-0 w-full text-black z-50 font-bold">
       <a className='flex-1'>
-        <h1 className="text-3xl p-4" >
+        <h1 className={`${isIntro ? "text-white" : "text-black"} text-3xl p-4 transition`} >
             <span className='cursor-pointer' onClick={clickLogoHandler}>Sky Archive</span>
         </h1>
       </a>
@@ -22,7 +23,7 @@ export default function Header() {
             <li className='text-gray-400'>ABOUT</li>
             <li className='text-gray-400'>PROJECTS</li>
         </ul>
-        <div className='flex-1 text-right '>
+        <div className={`${isIntro ? "text-white" : "text-black"} flex-1 text-right transition`}>
           <a href="mailto:sonhaneul96@gmail.com" className='p-4 text-xl'>sonhaneul96@gmail.com</a>
         </div>
     </header>
