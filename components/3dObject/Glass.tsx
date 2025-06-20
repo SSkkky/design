@@ -11,20 +11,20 @@ export function GlassSphere({ position }: { position: [number, number, number] }
   const ref = useRef<THREE.Mesh>(null!)
 
   useFrame(({ clock }) => {
-    ref.current.rotation.y = clock.getElapsedTime() * 0.3
+    ref.current.rotation.x = clock.getElapsedTime() * 0.3
   })
 
   return (
-    <mesh ref={ref} position={position} scale={[1.2, 1.2, 1.2]}>
-      <sphereGeometry args={[1, 128, 128]} />
+    <mesh ref={ref} position={position} scale={[0.7, 0.7, 0.7]}>
+      <torusGeometry args={[1, 0.4, 12, 100]} />
       <MeshTransmissionMaterial
         transmission={1}
         roughness={0}
         thickness={1}
         ior={1.5}
-        chromaticAberration={0.1}
-        distortion={0.3}
-        distortionScale={0.6}
+        chromaticAberration={0.3}
+        distortion={0.5}
+        distortionScale={0.5}
         temporalDistortion={0.1}
         background={new THREE.Color('white')}
       />
@@ -37,11 +37,11 @@ export function GlassCylinder({ position }: { position: [number, number, number]
   const ref = useRef<THREE.Mesh>(null!)
 
   useFrame(({ clock }) => {
-    ref.current.rotation.x = clock.getElapsedTime() * 0.4
+    ref.current.rotation.x = clock.getElapsedTime() * 0.3
   })
 
   return (
-    <mesh ref={ref} position={position} scale={[1, 1.5, 1]}>
+    <mesh ref={ref} position={position} scale={[1, 1.2, 1]}>
       <cylinderGeometry args={[0.6, 0.6, 2, 64]} />
       <MeshTransmissionMaterial
         transmission={1}
@@ -49,7 +49,7 @@ export function GlassCylinder({ position }: { position: [number, number, number]
         thickness={1}
         ior={1.4}
         chromaticAberration={0.08}
-        distortion={0.2}
+        distortion={0.5}
         distortionScale={0.4}
         background={new THREE.Color('transparent')}
       />
@@ -62,11 +62,11 @@ export function GlassSpring({ position }: { position: [number, number, number] }
   const ref = useRef<THREE.Mesh>(null!)
 
   useFrame(({ clock }) => {
-    ref.current.rotation.z = clock.getElapsedTime() * 0.6
+    ref.current.rotation.z = clock.getElapsedTime() * 0.2
   })
 
   return (
-    <mesh ref={ref} position={position} scale={[1.2, 1.2, 1.2]}>
+    <mesh ref={ref} position={position} scale={[1,1,1]}>
       <torusKnotGeometry args={[0.6, 0.2, 150, 20]} />
       <MeshTransmissionMaterial
         transmission={1}
@@ -74,8 +74,9 @@ export function GlassSpring({ position }: { position: [number, number, number] }
         thickness={1.2}
         ior={1.6}
         chromaticAberration={0.12}
-        distortion={0.25}
+        distortion={0.5}
         distortionScale={0.5}
+        temporalDistortion={0.15}
         background={new THREE.Color('white')}
       />
     </mesh>
