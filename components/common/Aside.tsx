@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import gsap from "gsap";
+import { gsap } from "@/app/lib/gsap"
 import { ArrowUpwardRounded } from "@mui/icons-material";
 
 export default function Footer() {
