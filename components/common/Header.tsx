@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export default function Header({ isIntro }: HeaderProps) {
   return (
-    <header className="fixed flex items-center top-0 left-0 w-full text-black z-50 font-bold bg-white ">
+    <header className="fixed flex items-center top-0 left-0 w-full text-black z-50 font-bold backdrop-blur-sm">
       <LogoComponent isIntro={isIntro} />
       <ul className="p-4 flex gap-4 text-xl">
         <li className="text-gray-400">INTRO</li>
