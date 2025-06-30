@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="kr">
-      <body className={`${pretendard.variable} font-sans tracking-tight`}>
+      <body className={`${pretendard.className} font-sans tracking-tight`}>
         <div className="min-h-screen bg-white text-black">
           {children}
         </div>
