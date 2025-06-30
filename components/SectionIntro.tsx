@@ -11,9 +11,9 @@ import { useRef } from "react";
 import * as THREE from "three";
 import {
   GlassSphere,
-  GlassCylinder,
+  ModelGear,
   GlassSpring,
-  GlassTest,
+  ModelSpring,
 } from "./3dObject/Glass";
 
 interface Props {
@@ -26,13 +26,13 @@ function CenteredText() {
 
   return (
     <Text
-      font="/fonts/Pretendard-Bold.woff"
       fontSize={responsiveFontSize}
       letterSpacing={-0.1}
       color="black"
       anchorX="center"
       anchorY="middle"
       position={[0, 0, -1]}
+      fontWeight={700}
     >
       SKY ARCHIVE
     </Text>
@@ -51,10 +51,9 @@ export default function SectionIntro({ targetRef }: Props) {
         <pointLight position={[-5, 5, 5]} intensity={100} color="#ffffff" />
         <CenteredText />
         <GlassSphere position={[-1, 1, -2]} />
-        <GlassCylinder position={[2.5, -0.5, -0.5]} />
-        <GlassSpring position={[-2.8, -1, 0]} />
-        {/* <GlassTest position={[1.5, 1, 0]} /> */}
-
+        <GlassSpring position={[-2.8, -1, 2]} />
+        <ModelSpring position={[1.5, -1.5, 0.5]} />
+        <ModelGear position={[2, 1, -2]} />
         {/* Environment 설정 변경 */}
         <Environment
           preset="sunset"
