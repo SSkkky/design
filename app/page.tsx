@@ -26,7 +26,7 @@ export default function Home() {
         console.log("isIntro:", entry.isIntersecting);
       },
       {
-        threshold: 0.1, // 10%만 보여도 true
+        threshold: 0.7, // 70% 이상 보일 때 isIntro 상태 변경
       }
     );
 
@@ -44,12 +44,12 @@ export default function Home() {
   return (
     <>
       <Header isIntro={isIntro} />
-      <SectionIntro targetRef={targetRef} />
+      <SectionIntro targetRef={targetRef}/>
       <SectionAbout />
       <SectionProjects />
       <Footer />
       {segments[0] === "projects" && segments[1] && <ProjectModal />}
-      <Aside/>
+      <Aside isIntro={isIntro}/>
     </>
   );
 }
