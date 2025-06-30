@@ -26,7 +26,7 @@ export function GlassSphere({ position }: { position: [number, number, number] }
         distortion={0.5}
         distortionScale={0.5}
         temporalDistortion={0.1}
-        background={new THREE.Color('white')}
+        background={new THREE.Color('transparent')}
       />
     </mesh>
   )
@@ -77,7 +77,7 @@ export function GlassSpring({ position }: { position: [number, number, number] }
         distortion={0.5}
         distortionScale={0.5}
         temporalDistortion={0.15}
-        background={new THREE.Color('white')}
+        background={new THREE.Color('transparent')}
       />
     </mesh>
   )
