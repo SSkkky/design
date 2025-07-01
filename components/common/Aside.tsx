@@ -4,11 +4,8 @@ import { useRouter } from "next/navigation";
 import { gsap } from "@/app/lib/gsap"
 import { ArrowUpwardRounded } from "@mui/icons-material";
 
-interface Props {
-  isIntro: boolean;
-}
 
-export default function Aside({ isIntro } : Props) {
+export default function Aside({ activeSection }:any) {
   const scrollToTop = () => {
     gsap.to(window, {
       scrollTo: { y: 0, autoKill: false },
@@ -24,7 +21,7 @@ export default function Aside({ isIntro } : Props) {
         fixed bottom-4 right-4 z-50 
         flex items-center justify-center cursor-pointer 
         hover:bg-gray-700 transition-all duration-500 ease-in-out
-        ${isIntro 
+        ${activeSection === "INTRO" 
           ? 'opacity-0 translate-y-4 pointer-events-none' 
           : 'opacity-100 translate-y-0 pointer-events-auto'
         }

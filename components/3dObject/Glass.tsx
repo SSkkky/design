@@ -22,9 +22,9 @@ export function GlassSphere({ position }: { position: [number, number, number] }
       <MeshTransmissionMaterial
         transmission={1}
         roughness={0}
-        thickness={1}
-        ior={1.5}
-        chromaticAberration={0.3}
+        thickness={1.2}
+        ior={2}
+        chromaticAberration={0.5}
         distortion={0.5}
         distortionScale={0.5}
         temporalDistortion={0.1}
@@ -39,7 +39,7 @@ export function ModelSpring({ position }: { position: [number, number, number] }
   const ref = useRef<THREE.Mesh>(null!)
   const [geometry, setGeometry] = useState<THREE.BufferGeometry | null>(null)
 
-  const obj = useLoader(OBJLoader, '/models/spring/Spring OBJ.obj')
+  const obj = useLoader(OBJLoader, '/assets/models/spring/Spring OBJ.obj')
 
   
   useEffect(() => {
@@ -117,7 +117,7 @@ export function GlassSpring({ position }: { position: [number, number, number] }
 /** 4. 기어 모델 gltf*/
 export function ModelGear({ position }: { position: [number, number, number] }) {
   const ref = useRef<THREE.Mesh>(null!)
-  const { nodes, materials } = useGLTF('/models/gear/scene.gltf');
+  const { nodes, materials } = useGLTF('/assets/models/gear/scene.gltf');
 
    useFrame(({ clock }) => {
     ref.current.rotation.z = clock.getElapsedTime() * 0.2

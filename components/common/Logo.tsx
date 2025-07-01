@@ -4,11 +4,8 @@ import { useRouter, useSelectedLayoutSegments } from "next/navigation";
 import { useEffect } from "react";
 import { gsap } from "@/app/lib/gsap";
 
-interface LogoProps {
-  isIntro: boolean;
-}
 
-export default function Logo({ isIntro }: LogoProps) {
+export default function Logo() {
   const router = useRouter();
   const segments = useSelectedLayoutSegments();
 

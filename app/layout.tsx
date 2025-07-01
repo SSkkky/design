@@ -4,7 +4,7 @@ import "./globals.css";
 import { ReactNode } from 'react'
 
 const pretendard = localFont({
-  src: "../public/fonts/PretendardVariable.woff2",
+  src: "../public/assets/fonts/PretendardVariable.woff2",
   weight: "400 900",
   style: "normal",
   display: "swap",

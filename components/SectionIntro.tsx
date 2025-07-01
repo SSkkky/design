@@ -16,10 +16,6 @@ import {
   ModelSpring,
 } from "./3dObject/Glass";
 
-interface Props {
-  targetRef: RefObject<any>;
-}
-
 function CenteredText() {
   const { viewport } = useThree();
   const responsiveFontSize = viewport.width * 0.18;
@@ -39,9 +35,9 @@ function CenteredText() {
   );
 }
 
-export default function SectionIntro({ targetRef }: Props) {
+export default function SectionIntro({ ref }:any) {
   return (
-    <div className="w-screen h-screen" ref={targetRef}>
+    <div className="w-screen h-screen" ref={ref}>
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
         <directionalLight
           position={[0, 10, 10]}
@@ -51,12 +47,12 @@ export default function SectionIntro({ targetRef }: Props) {
         <pointLight position={[-5, 5, 5]} intensity={100} color="#ffffff" />
         <CenteredText />
         <GlassSphere position={[-1, 1, -2]} />
-        <GlassSpring position={[-2.8, -1, 2]} />
+        <GlassSpring position={[-2.8, -1, 0.5]} />
         <ModelSpring position={[1.5, -1.5, 0.5]} />
         <ModelGear position={[2, 1, -2]} />
         {/* Environment 설정 변경 */}
         <Environment
-          preset="sunset"
+          preset="studio"
           background={false}
           environmentIntensity={20} // 환경 조명 강도(밝게)
         />

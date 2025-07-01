@@ -6,11 +6,40 @@ const AlexBrush = Alex_Brush({
   weight: ["400"],
 });
 
-export default function SectionAbout() {
+const datas = [
+  {
+    title: "CAREER",
+    content: [
+      {
+        date: "2024.07~12",
+        description: "피터패트 (프론트엔드 주니어 개발자)",
+      },
+      {
+        date: "2019~2020",
+        description: "제우메디컬 (퍼블리셔)",
+      },
+    ],
+  },
+  {
+    title: "EDUCATION",
+    content: [
+      {
+        date: "2023.10~2024.04",
+        description: "그린 컴퓨터 아카데미 프론트엔드 교육과정",
+      },
+      {
+        date: "2020~2024",
+        description: "서울과학기술대학교 문화예술학과 졸업",
+      },
+    ],
+  }
+]
+
+export default function SectionAbout({ref}:any) {
   // 공통 스타일 변수
   const articleCommonStyles =
     "h-[50vw] xl:h-[50vh] flex flex-col justify-end p-[2vw]";
-  const subTitleStyles = "font-bold text-[20px] mb-[2vw]";
+  const subTitleStyles = "font-bold text-[20px] mb-[1.5vw]";
 
   const SkillListComponents = () => {
     const skillList = [
@@ -41,6 +70,7 @@ export default function SectionAbout() {
         grid-rows-auto
         xl:grid-cols-4    /* xl 이상에서 4열로 */
       "
+      ref={ref}
     >
       <article
         className={`${articleCommonStyles} justify-center! col-span-2 xl:col-span-2 border-r border-b`}
@@ -61,12 +91,29 @@ export default function SectionAbout() {
         <h3 className={`${subTitleStyles}`}>SKILLS</h3>
         <SkillListComponents />
       </article>
-      <article className={`${articleCommonStyles} border-r`}>5</article>
-      <article className={`${articleCommonStyles} border-r`}>6</article>
+      {/*      career, education      */}
+      { 
+        datas.map((data, index) => (
+          <article
+            className={`${articleCommonStyles} border-r`}
+            key={data.title}
+          >
+            <h3 className={`${subTitleStyles}`}>{data.title}</h3>
+            <ul>
+              {data.content.map((item, idx) => (
+                <li key={idx}>
+                  <b>{item.date}</b>
+                  <span className="pl-2">{item.description}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+          ))
+      }
       <article
-        className={`${articleCommonStyles} col-span-2 xl:col-span-2 border-t xl:border-none`}
+        className={`${articleCommonStyles} col-span-2 xl:col-span-2 border-t xl:border-none p-0! opacity-50`}
       >
-        7-8
+        <img src="https://cdn.pixabay.com/photo/2017/09/03/10/52/white-cloud-2709896_1280.jpg" alt="Profile" className="w-full h-full object-cover" />
       </article>
     </section>
   );

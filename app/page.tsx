@@ -12,44 +12,65 @@ import { useSelectedLayoutSegments } from "next/navigation";
 
 export default function Home() {
   const segments = useSelectedLayoutSegments();
-  const [isIntro, setIsIntro] = useState<boolean>(false);
-  const targetRef = useRef<any>(null);
+  const [activeSection, setActiveSection] = useState('INTRO');
+
+  const sectionIds = ['INTRO', 'ABOUT', 'PROJECTS'];
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+
+  // 섹션 ref 등록용 함수
+  const setRef = (el: HTMLElement | null, index: number) => {
+    sectionRefs.current[index] = el;
+  };
+
+  // 해당 섹션으로 스크롤 이동
+  const scrollToSection = (id: string) => {
+    const idx = sectionIds.indexOf(id);
+    const el = sectionRefs.current[idx];
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+  };
 
   useEffect(() => {
-    // 현재 intro(ref)가 화면에 보이는지 확인하는 Intersection Observer 설정
-    if (typeof window === "undefined") return;
-    if (!targetRef.current) return;
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsIntro(entry.isIntersecting);
-        console.log("isIntro:", entry.isIntersecting);
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const idx = sectionRefs.current.findIndex(ref => ref === entry.target);
+            if (idx !== -1) {
+              setActiveSection(sectionIds[idx]);
+            }
+          }
+        });
       },
-      {
-        threshold: 0.7, // 70% 이상 보일 때 isIntro 상태 변경
-      }
+      { threshold: 0.6 }
     );
 
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
-    }
-
-    return () => {
-      if (targetRef.current) {
-        observer.unobserve(targetRef.current);
-      }
-    };
+    sectionRefs.current.forEach(el => el && observer.observe(el));
+    return () => observer.disconnect();
   }, []);
+
+  const props = {sectionIds, activeSection, scrollToSection};
 
   return (
     <>
-      <Header isIntro={isIntro} />
-      <SectionIntro targetRef={targetRef}/>
-      <SectionAbout />
-      <SectionProjects />
+      <Header props={props} />
+
+      <div ref={el => setRef(el, 0)}>
+        <SectionIntro />
+      </div>
+
+      <div ref={el => setRef(el, 1)}>
+        <SectionAbout />
+      </div>
+
+      <div ref={el => setRef(el, 2)}>
+        <SectionProjects />
+      </div>
+
       <Footer />
       {segments[0] === "projects" && segments[1] && <ProjectModal />}
-      <Aside isIntro={isIntro}/>
+      <Aside activeSection={activeSection} />
     </>
   );
 }
