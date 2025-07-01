@@ -20,7 +20,7 @@ export default function Logo() {
 
   return (
     <a className="flex-1">
-      <h1 className="text-3xl p-4 text-black">
+      <h1 className="p-3 md:p-4 text-black">
         <span className="cursor-pointer" onClick={clickLogoHandler}>
           Sky Archive
         </span>
