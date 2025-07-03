@@ -37,8 +37,12 @@ function CenteredText() {
 
 export default function SectionIntro({ ref }:any) {
   return (
-    <div className="w-screen h-screen" ref={ref}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+    <div className="w-screen h-screen relative" ref={ref}>
+      {/* pointer-events-auto :	Canvas 내부만 이벤트 허용 */}
+      <Canvas
+      camera={{ position: [0, 0, 5], fov: 50 }}
+      className="absolute inset-0 pointer-events-none touch-auto"
+      style={{touchAction: "auto"}}>
         <directionalLight
           position={[0, 10, 10]}
           intensity={20}
