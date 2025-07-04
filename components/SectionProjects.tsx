@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -14,16 +14,17 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
   const {id, desc} = project;
 
   return (
-    <div
-      onClick={() => (window.location.href = `/projects/${project.slug}`)}
-      className="cursor-pointer overflow-hidden border border-gray-300 hover:border-black"
+     <Link href={`/projects/${project.slug}`}>
+    <motion.div
+      layoutId={`project-${project.id}`}
+      className="cursor-pointer overflow-hidden border border-gray-200 hover:border-white"
     >
      <img
       src={`/assets/projects/${id}/thumb.png`}
       alt={desc}
       className="w-full break-inside-avoid grayscale hover:grayscale-0 hover:scale-110 transition duration-300"
     />
-    </div>
+    </motion.div></Link>
   );
 }
 
@@ -73,11 +74,11 @@ export default function SectionProjects({ref}:any) {
         <AnimatePresence mode="wait"> {/* AnimatePresence exit : 퇴장 애니메이션까지 적용 가능 */}
           {filteredProjects.map((project, index) => (
             <motion.div
-              key={`${project.slug}-${selectedYear}`} // 재실행 강제
+              key={`${project.slug}-${selectedYear}`} // 등장 애니메이션 재실행 강제
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.1 }} // 순차적 등장 (딜레이)
             >
               <ProjectCard project={project} />
             </motion.div>
