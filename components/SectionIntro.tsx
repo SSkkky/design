@@ -41,8 +41,7 @@ export default function SectionIntro({ ref }:any) {
       {/* pointer-events-auto :	Canvas 내부만 이벤트 허용 */}
       <Canvas
       camera={{ position: [0, 0, 5], fov: 50 }}
-      className="absolute inset-0 pointer-events-none touch-auto"
-      style={{touchAction: "auto"}}>
+      className="absolute inset-0 pointer-events-none !touch-pan-y">
         <directionalLight
           position={[0, 10, 10]}
           intensity={20}
