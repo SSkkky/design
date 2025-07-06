@@ -11,8 +11,7 @@ export default function ProjectDetailPage() {
   const { slug } = useParams(); // title
   const services = ['title', 'date', 'member', 'year', 'desc'];
 
-  const data = dataJSON.find((el) => el.slug === slug);
-  console.log(data);
+  const data:any = dataJSON.find((el) => el.slug === slug);
 
   // 데이터가 없을때 notFound로 이동
   if (!data) {
@@ -57,7 +56,7 @@ export default function ProjectDetailPage() {
                 <h3 className="w-[140px]">tags</h3>
                 <ul className="w-[100%] font-normal flex gap-1">
                   {
-                    data.tags.map((text, key)=>(
+                    data.tags.map((text:string, key:number)=>(
                       <li key={key} className="bg-gray-200 rounded-full px-3 text-sm">{`#${text}`}</li>
                     ))
                   }
