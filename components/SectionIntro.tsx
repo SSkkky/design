@@ -15,6 +15,8 @@ import {
   GlassSpring,
   ModelSpring,
 } from "./3dObject/Glass";
+import SmoothFollower from "@/app/hooks/SmoothFollowerCursor";
+import FluidCursor from "@/app/hooks/FluidCursor";
 
 function CenteredText() {
   const { viewport } = useThree();
@@ -35,10 +37,19 @@ function CenteredText() {
   );
 }
 
-export default function SectionIntro({ ref }:any) {
+type IntroProps = {
+  introProps: {
+    shouldRender: boolean;
+  }
+}
+
+export default function SectionIntro({ introProps }:IntroProps) {
+  const { shouldRender } = introProps;
+
   return (
-    <div className="w-screen h-screen relative" ref={ref}>
+    <div className="w-screen h-screen relative">
       {/* pointer-events-auto :	Canvas 내부만 이벤트 허용 */}
+      {shouldRender && <FluidCursor />}
       <Canvas
       camera={{ position: [0, 0, 5], fov: 50 }}
       className="absolute inset-0 pointer-events-none !touch-pan-y">

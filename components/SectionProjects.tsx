@@ -52,7 +52,7 @@ export default function SectionProjects({ref}:any) {
   // console.log("Filtered Projects:", filteredProjects);
 
   return (
-    <section className="px-6 py-16 bg-white text-black w-screen min-h-screen" ref={ref}>
+    <section className="px-6 py-16 bg-white text-black w-screen " ref={ref}>
       {/* 프로젝트를 년도로 필터링하는 메뉴 */}
       <ul className="flex gap-[4vw] m-[4vw] justify-center">
         {yearGroups.map((year, index) => (

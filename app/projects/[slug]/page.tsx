@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRouter, useParams, notFound } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import dataJSON from "@/app/assets/data.json";
 
@@ -10,6 +10,7 @@ export default function ProjectDetailPage() {
   const router = useRouter();
   const { slug } = useParams(); // title
   const services = ['title', 'date', 'member', 'year', 'desc'];
+  const [onMouse, setOnMouse] = useState(false);
 
   const data:any = dataJSON.find((el) => el.slug === slug);
 
@@ -36,7 +37,9 @@ export default function ProjectDetailPage() {
         <div className="texts w-1/2 p-12">
           <button
             onClick={handleBack}
-            className="px-4 py-2 bg-white text-black rounded border hover:bg-gray-200"
+            className={`relative px-4 py-2 bg-white text-black transition duration-300 ${onMouse && "before:absolute before:bg-black before:w-full before:h-[1px]"}`}
+            onMouseEnter={()=>setOnMouse(true)}
+            onMouseLeave={()=>setOnMouse(false)}
           >
             ← 뒤로가기
           </button>
@@ -47,14 +50,14 @@ export default function ProjectDetailPage() {
               {
                 services.map((item, key)=>(
                   <li key={key} className="flex border-t-1 p-1">
-                    <h3 className="w-[140px]">{item}</h3>
-                    <p className="w-[100%] font-normal">{data[item]}</p>
+                    <h3 className="w-[90px]">{item}</h3>
+                    <p className="flex-1 font-normal break-words">{data[item]}</p>
                   </li>
                 ))
               }
               <li className="flex border-t-1 p-1">
-                <h3 className="w-[140px]">tags</h3>
-                <ul className="w-[100%] font-normal flex gap-1">
+                <h3 className="w-[90px]">tags</h3>
+                 <ul className="flex-1 flex flex-wrap gap-1 font-normal">
                   {
                     data.tags.map((text:string, key:number)=>(
                       <li key={key} className="bg-gray-200 rounded-full px-3 text-sm">{`#${text}`}</li>
