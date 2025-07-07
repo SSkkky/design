@@ -10,6 +10,8 @@ import ProjectModal from "@/components/ProjectModal";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { deviceUtils } from "./utils/deviceUtils";
 import { viewportUtils } from "./utils/viewportUtils";
+import SmoothFollower from "@/app/hooks/SmoothFollowerCursor";
+import FluidCursor from "@/app/hooks/FluidCursor";
 
 export default function Home() {
   const segments = useSelectedLayoutSegments();
@@ -83,9 +85,10 @@ export default function Home() {
   return (
     <>
       <Header props={props} />
+      {shouldRender && <SmoothFollower />}
 
       <div ref={(el) => setRef(el, 0)}>
-        <SectionIntro introProps={introProps} />
+        <SectionIntro />
       </div>
 
       <div ref={(el) => setRef(el, 1)}>
