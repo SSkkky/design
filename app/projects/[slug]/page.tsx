@@ -9,10 +9,10 @@ import dataJSON from "@/app/assets/data.json";
 export default function ProjectDetailPage() {
   const router = useRouter();
   const { slug } = useParams(); // title
-  const services = ['title', 'date', 'member', 'year', 'desc'];
+  const services = ["title", "date", "member", "year", "desc"];
   const [onMouse, setOnMouse] = useState(false);
 
-  const data:any = dataJSON.find((el) => el.slug === slug);
+  const data: any = dataJSON.find((el) => el.slug === slug);
 
   // 데이터가 없을때 notFound로 이동
   if (!data) {
@@ -37,9 +37,12 @@ export default function ProjectDetailPage() {
         <div className="texts w-1/2 p-12">
           <button
             onClick={handleBack}
-            className={`relative px-4 py-2 bg-white text-black transition duration-300 ${onMouse && "before:absolute before:bg-black before:w-full before:h-[1px]"}`}
-            onMouseEnter={()=>setOnMouse(true)}
-            onMouseLeave={()=>setOnMouse(false)}
+            className={`relative p-2 bg-white text-black transition duration-200 
+    before:absolute before:bottom-0 before:left-0 before:h-[1px] before:bg-black 
+    before:transition-all before:duration-300 before:ease-in-out
+    ${onMouse ? "before:w-full" : "before:w-0"}`}
+            onMouseEnter={() => setOnMouse(true)}
+            onMouseLeave={() => setOnMouse(false)}
           >
             ← 뒤로가기
           </button>
@@ -47,22 +50,21 @@ export default function ProjectDetailPage() {
           <section className="mt-[15vh] flex gap-10 font-bold">
             <h2>Service</h2>
             <ul>
-              {
-                services.map((item, key)=>(
-                  <li key={key} className="flex border-t-1 p-1">
-                    <h3 className="w-[90px]">{item}</h3>
-                    <p className="flex-1 font-normal break-words">{data[item]}</p>
-                  </li>
-                ))
-              }
+              {services.map((item, key) => (
+                <li key={key} className="flex border-t-1 p-1">
+                  <h3 className="w-[90px]">{item}</h3>
+                  <p className="flex-1 font-normal break-words">{data[item]}</p>
+                </li>
+              ))}
               <li className="flex border-t-1 p-1">
                 <h3 className="w-[90px]">tags</h3>
-                 <ul className="flex-1 flex flex-wrap gap-1 font-normal">
-                  {
-                    data.tags.map((text:string, key:number)=>(
-                      <li key={key} className="bg-gray-200 rounded-full px-3 text-sm">{`#${text}`}</li>
-                    ))
-                  }
+                <ul className="flex-1 flex flex-wrap gap-1 font-normal">
+                  {data.tags.map((text: string, key: number) => (
+                    <li
+                      key={key}
+                      className="bg-gray-200 rounded-full px-3 text-sm"
+                    >{`#${text}`}</li>
+                  ))}
                 </ul>
               </li>
             </ul>
@@ -90,8 +92,6 @@ export default function ProjectDetailPage() {
           className="w-full h-full object-cover"
         />
       </section>
-
-
     </motion.div>
   );
 }
