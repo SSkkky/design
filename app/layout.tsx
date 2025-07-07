@@ -23,8 +23,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="kr">
       <body className={`${pretendard.className} font-sans tracking-tight`}>
-        <div className="min-h-screen bg-white text-black">{children}</div>
-        <Footer />
+        <div className="min-h-screen bg-white text-black">
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
