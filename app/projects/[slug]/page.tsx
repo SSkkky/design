@@ -5,6 +5,8 @@ import { useRouter, useParams, notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import dataJSON from "@/app/assets/data.json";
+import { deviceUtils } from "@/app/utils/deviceUtils";
+import { viewportUtils } from "@/app/utils/viewportUtils";
 
 export default function ProjectDetailPage() {
   const router = useRouter();
@@ -20,6 +22,9 @@ export default function ProjectDetailPage() {
   }
 
   const handleBack = () => {
+    // 이전 방문 페이지가 main이면 뒤로가기
+    // slug페이지
+    const from = document.referrer;
     router.back();
   };
 
@@ -33,26 +38,25 @@ export default function ProjectDetailPage() {
       className="page-wrapper min-h-screen"
     >
       {/*         1. 메인          */}
-      <section className="w-screen h-screen flex">
-        <div className="texts w-1/2 p-12">
-          <button
-            onClick={handleBack}
-            className={`relative p-2 bg-white text-black transition duration-200 
-    before:absolute before:bottom-0 before:left-0 before:h-[1px] before:bg-black 
-    before:transition-all before:duration-300 before:ease-in-out
-    ${onMouse ? "before:w-full" : "before:w-0"}`}
-            onMouseEnter={() => setOnMouse(true)}
-            onMouseLeave={() => setOnMouse(false)}
-          >
-            ← 뒤로가기
-          </button>
-          <h1 className="text-8xl font-bold mt-[20vh] mb-4">{data.title}</h1>
+      <section
+        className="w-screen h-screen flex flex-row
+      max-lg:flex-col
+      max-lg:text-sm"
+      >
+        <div
+          className="texts w-1/2 p-12
+        max-lg:w-full max-lg:p-8
+        max-md:p-4"
+        >
+          <h2 className="text-8xl font-bold mt-[20vh] mb-4
+          max-lg:text-6xl
+          max-md:text-4xl">{data.title}</h2>
           <section className="mt-[15vh] flex gap-10 font-bold">
-            <h2>Service</h2>
+            <h3>Service</h3>
             <ul>
               {services.map((item, key) => (
                 <li key={key} className="flex border-t-1 p-1">
-                  <h3 className="w-[90px]">{item}</h3>
+                  <h4 className="w-[90px]">{item}</h4>
                   <p className="flex-1 font-normal break-words">{data[item]}</p>
                 </li>
               ))}

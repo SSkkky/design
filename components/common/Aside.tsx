@@ -5,14 +5,8 @@ import { gsap } from "@/app/lib/gsap"
 import { ArrowUpwardRounded } from "@mui/icons-material";
 
 
-export default function Aside({ activeSection }:any) {
-  const scrollToTop = () => {
-    gsap.to(window, {
-      scrollTo: { y: 0, autoKill: false },
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-  };
+export default function Aside({ asideProps }:any) {
+  const {scrollToTop, asideVisible} = asideProps;
 
   return (
     <aside
@@ -22,9 +16,9 @@ export default function Aside({ activeSection }:any) {
         flex items-center justify-center cursor-pointer 
         hover:bg-gray-700 transition-all duration-500 ease-in-out
         md:w-16 md:h-16
-        ${activeSection === "INTRO" 
-          ? 'opacity-0 translate-y-4 pointer-events-none' 
-          : 'opacity-100 translate-y-0 pointer-events-auto'
+        ${asideVisible
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 translate-y-4 pointer-events-none' 
         }
       `}
       onClick={scrollToTop}

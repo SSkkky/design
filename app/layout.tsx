@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
+import { SectionRefProvider } from "@/context/SectionRefContext";
 import Footer from "@/components/common/Footer";
+import Header from "@/components/common/Header";
 
 const pretendard = localFont({
   src: "../public/assets/fonts/PretendardVariable.woff2",
@@ -23,10 +25,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="kr">
       <body className={`${pretendard.className} font-sans tracking-tight`}>
-        <div className="min-h-screen bg-white text-black">
-          {children}
-          <Footer />
-        </div>
+        <SectionRefProvider>
+          <div className="min-h-screen bg-white text-black">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </SectionRefProvider>
       </body>
     </html>
   );

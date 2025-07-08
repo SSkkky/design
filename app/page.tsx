@@ -1,6 +1,7 @@
 "use client";
 
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import Header from "@/components/common/Header";
 import Aside from "@/components/common/Aside";
 import SectionIntro from "@/components/SectionIntro";
@@ -12,51 +13,15 @@ import { deviceUtils } from "./utils/deviceUtils";
 import { viewportUtils } from "./utils/viewportUtils";
 import SmoothFollower from "@/app/hooks/SmoothFollowerCursor";
 import FluidCursor from "@/app/hooks/FluidCursor";
+import { useSectionRefs } from "@/context/SectionRefContext";
 
 export default function Home() {
+  const { sectionRefs } = useSectionRefs();
   const segments = useSelectedLayoutSegments();
-  const [activeSection, setActiveSection] = useState("INTRO");
   const [shouldRender, setShouldRender] = useState(false);
-
-  // S : 해당 섹션으로 스크롤 이동
-  const sectionIds = ["INTRO", "ABOUT", "PROJECTS"];
-  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
-
-  const setRef = (el: HTMLElement | null, index: number) => {
-    // 섹션 ref 등록용 함수
-    sectionRefs.current[index] = el;
-  };
-
-  const scrollToSection = (id: string) => {
-    const idx = sectionIds.indexOf(id);
-    const el = sectionRefs.current[idx];
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-  // E : 해당 섹션으로 스크롤 이동
+  const [asideVisible, setAsideVisible] = useState(false);
 
   useEffect(() => {
-    // S : 섹션 위치 확인용 옵저버
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = sectionRefs.current.findIndex(
-              (ref) => ref === entry.target
-            );
-            if (idx !== -1) {
-              setActiveSection(sectionIds[idx]);
-            }
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
-    // E : 섹션 위치 확인용 옵저버
-
-    sectionRefs.current.forEach((el) => el && observer.observe(el));
-
     // S : 클라이언트 환경 OS 체크 (*PC이면 커서 이펙트 적용)
     const renderIntroCursor = () => {
       // pc가 아니거나 768px 이상이면 intro에 커서 노출
@@ -72,34 +37,44 @@ export default function Home() {
 
 
     return () => {
-      if (typeof observer !== "undefined") {
-        observer.disconnect();
-      }
       window.removeEventListener("resize", renderIntroCursor);
     };
   }, []);
 
-  const props = { sectionIds, activeSection, scrollToSection };
-  const introProps = { shouldRender };
+   const setRef = (el: HTMLElement | null, index: number) => {
+    sectionRefs.current[index] = el;
+  };
+
+   useEffect(() => {
+    const handleScroll = () => {
+      setAsideVisible(window.scrollY > 0); // 0보다 크면 보여줌
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const asideProps = {scrollToTop, asideVisible}
 
   return (
-    <>
-      <Header props={props} />
+    <motion.div
+      initial={{ opacity: 0, y: 0 }}  // 등장할 때
+      animate={{ opacity: 1, y: 0 }}   // 현재 상태
+      exit={{ opacity: 0, y: -20 }}    // 사라질 때
+      transition={{ duration: 1.2, ease: "easeInOut" }}
+    >
       {shouldRender && <SmoothFollower />}
 
-      <div ref={(el) => setRef(el, 0)}>
-        <SectionIntro />
-      </div>
-
-      <div ref={(el) => setRef(el, 1)}>
-        <SectionAbout />
-      </div>
-
-      <div ref={(el) => setRef(el, 2)}>
-        <SectionProjects />
-      </div>
+      <div ref={(el) => setRef(el, 0)}><SectionIntro /></div>
+      <div ref={(el) => setRef(el, 1)}><SectionAbout /></div>
+      <div ref={(el) => setRef(el, 2)}><SectionProjects /></div>
+      
       {segments[0] === "projects" && segments[1] && <ProjectModal />}
-      <Aside activeSection={activeSection} />
-    </>
+      <Aside asideProps={asideProps} />
+    </motion.div>
   );
 }
