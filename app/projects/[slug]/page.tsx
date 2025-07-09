@@ -1,14 +1,47 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useRouter, useParams, notFound } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import dataJSON from "@/app/assets/data.json";
 import { deviceUtils } from "@/app/utils/deviceUtils";
 import { viewportUtils } from "@/app/utils/viewportUtils";
 
 export default function ProjectDetailPage() {
+  const { scrollYProgress } = useScroll();
+
+  const background = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [
+      "linear-gradient(to right, #f2709c, #ff9472)", // 시작 색
+      "linear-gradient(to right, #00c6ff, #0072ff)", // 끝 색
+    ]
+  );
+
+  return (
+    <>
+      <motion.div
+        id="scroll-indicator"
+        style={{
+          scaleX: scrollYProgress,
+          position: "fixed",
+          zIndex: 10000,
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 8,
+          originX: 0,
+          background,
+        }}
+      />
+      <Content />
+    </>
+  );
+}
+
+export function Content() {
   const router = useRouter();
   const { slug } = useParams(); // title
   const services = ["title", "date", "member", "year", "desc"];
@@ -40,19 +73,28 @@ export default function ProjectDetailPage() {
       {/*         1. 메인          */}
       <section
         className="w-screen h-screen flex flex-row
-      max-lg:flex-col
-      max-lg:text-sm"
+      max-md:flex-col-reverse
+      max-md:justify-end
+      max-md:text-sm"
       >
         <div
           className="texts w-1/2 p-12
-        max-lg:w-full max-lg:p-8
-        max-md:p-4"
+        max-md:p-4 max-md:w-full"
         >
-          <h2 className="text-8xl font-bold mt-[20vh] mb-4
+          <h2
+            className="text-8xl font-bold mt-[20vh] mb-4
           max-lg:text-6xl
-          max-md:text-4xl">{data.title}</h2>
-          <section className="mt-[15vh] flex gap-10 font-bold">
-            <h3>Service</h3>
+          max-md:hidden"
+          >
+            {data.title}
+          </h2>
+          <section
+            className="mt-[15vh] flex gap-10 font-bold
+          max-md:flex-col
+          max-md:gap-4
+          max-md:mt-[0px]"
+          >
+            <h3 className="">Service</h3>
             <ul>
               {services.map((item, key) => (
                 <li key={key} className="flex border-t-1 p-1">
@@ -77,7 +119,8 @@ export default function ProjectDetailPage() {
         <img
           src={`/assets/projects/${data.id}/thumb.png`}
           alt={data.desc}
-          className="w-1/2 h-full p-4 object-cover"
+          className="w-1/2 h-[calc(100%-128px)] mt-[64px] object-cover object-top rounded-tl-2xl rounded-bl-2xl
+          max-md:w-full max-md:h-[calc(50%-64px)] max-md:rounded-tl-none max-md:rounded-bl-none"
         />
       </section>
       {/*         2. overview          */}
