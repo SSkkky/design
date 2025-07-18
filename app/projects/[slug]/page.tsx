@@ -8,6 +8,9 @@ import dataJSON from "@/app/assets/data.json";
 import { deviceUtils } from "@/app/utils/deviceUtils";
 import { viewportUtils } from "@/app/utils/viewportUtils";
 import ArrowOutward from "@mui/icons-material/ArrowOutward";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import Close from "@mui/icons-material/Close";
 
 export default function ProjectDetailPage() {
   const { scrollYProgress } = useScroll();
@@ -17,7 +20,7 @@ export default function ProjectDetailPage() {
     [0, 1],
     [
       "linear-gradient(to right, #fff, #000)", // 끝 색
-      "linear-gradient(to right, #000, #fff)", // 끝 색
+      "linear-gradient(to right, #000, #000)", // 끝 색
     ]
   );
 
@@ -47,12 +50,18 @@ export function Content() {
   const { slug } = useParams(); // title
   const services = ["date", "member", "website"];
   const details = ["challenge", "goal", "result"];
-  const [onMouse, setOnMouse] = useState(false);
-  const maxGallaryLength = 6;
-  const gallaryLengthArray = Array.from(
-    { length: maxGallaryLength },
-    (_, i) => i + 1
-  );
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // S : 모달 오픈시 스크롤 잠금 효과
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+
+    return () => {
+      document.body.style.overflow = "auto"; // 안전하게 해제
+    };
+  }, [isOpen]);
+  // E : 모달 오픈시 스크롤 잠금 효과
 
   const data: any = dataJSON.find((el) => el.slug === slug);
 
@@ -71,6 +80,29 @@ export function Content() {
   const capitalizedText = (text: string) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
+
+  // S : 갤러리 모달 관련
+  const openModal = (index: number) => {
+    setCurrentIndex(index);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? data.gallary.length - 1 : prev - 1
+    );
+  };
+
+  const nextImage = () => {
+    setCurrentIndex((prev) =>
+      prev === data.gallary.length - 1 ? 0 : prev + 1
+    );
+  };
+  // E : 갤러리 모달 관련
 
   return (
     <motion.div
@@ -180,12 +212,13 @@ export function Content() {
           {data.gallary.map((item: any, index: number) => (
             <article
               key={index}
-              className="relative w-[calc(50%-20px)] aspect-square group overflow-hidden"
+              className="relative w-[calc(50%-20px)] aspect-square group overflow-hidden cursor-pointer"
+              onClick={() => openModal(index)}
             >
               <img
                 src={`/assets/projects/${data.id}/${item.image}`}
-                alt={`Gallery ${index + 1}`}
-                className="object-cover w-full h-full"
+                alt={`${index + 1}번째 이미지`}
+                className="object-cover object-top object-center w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-105"
               />
               <div
                 className="absolute bottom-0 left-0 w-full h-[50%] bg-[rgba(0,0,0,0.5)]
@@ -199,7 +232,7 @@ export function Content() {
           ))}
         </section>
       </section>
-      {/*         4. Review          */}
+      {/*         4. review          */}
       <section className="px-8 py-24 flex gap-10 mb-[64px]">
         <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10">
           <h3>Review</h3>
@@ -212,6 +245,46 @@ export function Content() {
           <p className="leading-8">{data.review.content}</p>
         </section>
       </section>
+      {/*         5. gallary modal          */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-10000 bg-[rgba(0,0,0,0.5)] flex flex-col items-center justify-center backdrop-blur-sm "
+          onClick={closeModal}
+        >
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              closeModal();
+            }}
+              className="absolute top-5 right-5 text-white text-4xl p-4 z-10 border-1 border-[rgba(0,0,0,0)] hover:border-white transition duration-200 cursor-pointer rounded-full w-[50px] h-[50px] flex items-center justify-center"
+          >
+            <Close/>
+          </button>
+          <p className="text-white font-bold">{currentIndex+1} / {data.gallary.length}</p>
+          <img
+            src={`/assets/projects/${data.id}/${data.gallary[currentIndex].image}`}
+            alt="popup"
+            className="max-w-full max-h-[90vh] object-contain px-12 py-4"
+          />
+          <div
+            className="absolute bottom-[10vw] flex justify-center items-center gap-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={prevImage}
+              className="text-white text-4xl p-4 z-10 border-1 border-[rgba(0,0,0,0)] hover:border-white transition duration-200 cursor-pointer rounded-full w-[50px] h-[50px] flex items-center justify-center"
+            >
+              <ArrowBack />
+            </button>
+            <button
+              onClick={nextImage}
+              className="text-white text-4xl p-4 z-10 border-1 border-[rgba(0,0,0,0)] hover:border-white transition duration-200 cursor-pointer rounded-full w-[50px] h-[50px] flex items-center justify-center"
+            >
+              <ArrowForward />
+            </button>
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 }
