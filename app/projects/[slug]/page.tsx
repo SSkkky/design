@@ -114,7 +114,7 @@ const Content = () => {
       className="page-wrapper min-h-screen max-w-[1920px] mx-auto"
     >
       {/*         1. 메인          */}
-      <section className="px-12 py-24 mt-[64px]">
+      <section className="px-12 py-24 mt-[64px] max-md:px-4 max-md:py-12">
         <h2
           className="text-8xl font-bold mb-8
           max-lg:text-6xl
@@ -170,7 +170,7 @@ const Content = () => {
         </section>
       </section>
       {/*         2. image overview          */}
-      <section className="w-full flex bg-black">
+      <section className="w-full flex bg-gray-200 min-h-[40vh]">
         <img
           src={`/assets/projects/${data.id}/overview.png`}
           alt={data.desc}
@@ -178,8 +178,10 @@ const Content = () => {
         />
       </section>
       {/*         3. details          */}
-      <section className="px-8 py-24 flex gap-10">
-        <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10">
+      <section className="px-8 py-24 flex gap-10
+      max-md:flex-col max-md:px-4 max-md:py-12">
+        <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10
+        max-md:border-r-0 max-md:pr-0">
           <h3>Details</h3>
           <div className="rotate-90 w-[40px] h-[40px]">
             <ArrowOutward fontSize="inherit" />
@@ -201,18 +203,21 @@ const Content = () => {
         </section>
       </section>
       {/*         4. Project Gallary          */}
-      <section className="px-8 py-24 flex gap-10">
-        <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10">
+      <section className="px-8 py-24 flex gap-10
+      max-md:flex-col max-md:px-4 max-md:py-12">
+        <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10
+        max-md:border-r-0 max-md:pr-0 max-md:flex-0">
           <h3>Project Gallary</h3>
           <div className="rotate-90 w-[40px] h-[40px]">
             <ArrowOutward fontSize="inherit" />
           </div>
         </section>
-        <section className="flex-2 flex flex-wrap gap-10">
+        <section className="flex-2 flex flex-wrap gap-10
+        max-md:flex-0 max-md:gap-4">
           {data.gallary.map((item: any, index: number) => (
             <article
               key={index}
-              className="relative w-[calc(50%-20px)] aspect-square group overflow-hidden cursor-pointer border-1 border-black "
+              className="relative w-[calc(50%-20px)] aspect-square group overflow-hidden cursor-pointer border-1 border-black max-md:w-[calc(50%-8px)]"
               onClick={() => openModal(index)}
             >
               <img
@@ -233,8 +238,10 @@ const Content = () => {
         </section>
       </section>
       {/*         4. review          */}
-      <section className="px-8 py-24 flex gap-10 mb-[64px]">
-        <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10">
+      <section className="px-8 py-24 flex gap-10 mb-[64px]
+      max-md:flex-col max-md:px-4 max-md:py-12">
+        <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10
+        max-md:border-r-0 max-md:pr-0 max-md:flex-0">
           <h3>Review</h3>
           <div className="rotate-90 w-[40px] h-[40px]">
             <ArrowOutward fontSize="inherit" />
