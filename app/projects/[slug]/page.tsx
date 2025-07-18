@@ -154,7 +154,7 @@ export function Content() {
               ))}
               <li className="flex border-t-1 py-3">
                 <h3 className="w-[90px]">{String("tags").toUpperCase()}</h3>
-                <ul className="flex-1 flex flex-wrap gap-1 font-normal">
+                <ul className="flex-1 flex flex-wrap gap-1 font-normal justify-end">
                   {data.tags.map((text: string, key: number) => (
                     <li
                       key={key}
@@ -212,7 +212,7 @@ export function Content() {
           {data.gallary.map((item: any, index: number) => (
             <article
               key={index}
-              className="relative w-[calc(50%-20px)] aspect-square group overflow-hidden cursor-pointer"
+              className="relative w-[calc(50%-20px)] aspect-square group overflow-hidden cursor-pointer border-1 border-black "
               onClick={() => openModal(index)}
             >
               <img
@@ -264,10 +264,10 @@ export function Content() {
           <img
             src={`/assets/projects/${data.id}/${data.gallary[currentIndex].image}`}
             alt="popup"
-            className="max-w-full max-h-[90vh] object-contain px-12 py-4"
+            className="max-w-full max-h-[66vh] object-contain px-12 py-4"
           />
           <div
-            className="absolute bottom-[10vw] flex justify-center items-center gap-4"
+            className="absolute bottom-[5vw] flex justify-center items-center gap-4"
             onClick={(e) => e.stopPropagation()}
           >
             <button
