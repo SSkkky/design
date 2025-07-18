@@ -104,6 +104,7 @@ export default function Header() {
       return (
         <a href="mailto:sonhaneul96@gmail.com" className="p-4">
           <span className=" max-md:hidden hover:text-gray-500 transition">sonhaneul96@gmail.com</span>
+          <span className=" min-md:hidden hover:text-gray-500 transition text-base">MAIL ME✉️</span>
         </a>
       );
     }
