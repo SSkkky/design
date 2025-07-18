@@ -45,7 +45,7 @@ export default function ProjectDetailPage() {
   );
 }
 
-export function Content() {
+const Content = () => {
   const router = useRouter();
   const { slug } = useParams(); // title
   const services = ["date", "member", "website"];
