@@ -56,7 +56,7 @@ export default function SectionProjects({ ref }: any) {
 
   return (
     <section
-      className="px-6 py-16 bg-white text-black w-screen min-h-screen"
+      className="px-6 py-16 bg-white text-black w-screen"
       ref={ref}
     >
       {/* 프로젝트를 년도로 필터링하는 메뉴 */}
