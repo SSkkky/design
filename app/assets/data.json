@@ -7,7 +7,7 @@
     "member": "개인",
     "year": 2023,
     "github": "https://github.com/SSkkky/NIKE-WOMAN",
-    "deploy": "https://sskkky.github.io/NIKE-WOMAN/",
+    "website": "https://sskkky.github.io/NIKE-WOMAN/",
     "desc": "Figma로 작성된 나이키 웹 디자인을 HTML, CSS, JavaScript로 구현한 프로젝트 입니다.",
     "features": [
       "반응형 웹 디자인",
@@ -15,7 +15,7 @@
       "Figma 디자인 구현"
     ],
     "tags": ["HTML", "CSS", "JavaScript"],
-    "review" : "기초 지식이 파편화되어 있던 것을 클론 프로젝트를 통해 하나로 연결하며, 지식을 '알고 있다'와 '사용한다'는 것의 차이를 배우게 된 경험이었습니다. 유연한 해상도 대응을 위해 CSS를 flex, %, viewport를 활용하여 설계하고 구현하는 과정이 재미있었습니다. 프로젝트를 진행하며 JavaScript로 다양한 클릭 이벤트를 생성하였는데, 이 과정을 통해 JavaScript가 'HTML과 CSS로 구성된 웹 페이지를 동적으로 만들어주는 언어'라는 것을 명확히 이해할 수 있었습니다."
+    "review": "기초 지식이 파편화되어 있던 것을 클론 프로젝트를 통해 하나로 연결하며, 지식을 '알고 있다'와 '사용한다'는 것의 차이를 배우게 된 경험이었습니다. 유연한 해상도 대응을 위해 CSS를 flex, %, viewport를 활용하여 설계하고 구현하는 과정이 재미있었습니다. 프로젝트를 진행하며 JavaScript로 다양한 클릭 이벤트를 생성하였는데, 이 과정을 통해 JavaScript가 'HTML과 CSS로 구성된 웹 페이지를 동적으로 만들어주는 언어'라는 것을 명확히 이해할 수 있었습니다."
   },
   {
     "id": 2,
@@ -25,14 +25,11 @@
     "member": "팀(5명)",
     "year": 2024,
     "github": "https://github.com/SSkkky/bottle",
-    "deploy": "https://sskkky.github.io/bottle/",
+    "website": "https://sskkky.github.io/bottle/",
     "desc": "<해피펍>은 주류 큐레이션 쇼핑몰입니다. HTML, SCSS, JAVASCRIPT를 활용하여 유연한 웹 해상도 대응을 위한 4단계 반응형 작업을 진행하였습니다. 저는 이 팀 프로젝트에서 고객 리뷰, 통합 검색 기능을 담당하고 JSON 데이터 수집, 기획, 디자인에 참여했습니다.",
-    "features": [
-      "고객 리뷰 기능",
-      "4단계 반응형 웹 디자인"
-    ],
+    "features": ["고객 리뷰 기능", "4단계 반응형 웹 디자인"],
     "tags": ["HTML", "CSS", "JavaScript"],
-    "review" : "팀 프로젝트를 통해 협업의 중요성을 깨달았습니다. 각자의 역할을 명확히 하고, 팀원들과의 소통을 통해 프로젝트를 성공적으로 완수할 수 있었습니다. 고객 리뷰 기능과 통합 검색 기능을 구현하면서 사용자 경험을 개선하는 데 집중했습니다. 이 프로젝트를 통해 JSON 데이터를 직접 만들며 구조를 이해하고 오브젝트와 배열을 작성하는 법을 익힐 수 있었습니다."
+    "review": "팀 프로젝트를 통해 협업의 중요성을 깨달았습니다. 각자의 역할을 명확히 하고, 팀원들과의 소통을 통해 프로젝트를 성공적으로 완수할 수 있었습니다. 고객 리뷰 기능과 통합 검색 기능을 구현하면서 사용자 경험을 개선하는 데 집중했습니다. 이 프로젝트를 통해 JSON 데이터를 직접 만들며 구조를 이해하고 오브젝트와 배열을 작성하는 법을 익힐 수 있었습니다."
   },
   {
     "id": 3,
@@ -42,7 +39,7 @@
     "member": "개인",
     "year": 2024,
     "github": "https://github.com/SSkkky/SFLIX",
-    "deploy": "https://skyflix-ten.vercel.app/",
+    "website": "https://skyflix-ten.vercel.app/",
     "desc": "<SFLIX>는 사용자가 영화와 TV 프로그램에 대한 정보를 확인할 수 있는 웹 서비스입니다. 이 서비스는 themoviedb API를 활용하여 개발되었습니다. 메인 페이지에서는 실시간 박스오피스 순위 정보를 슬라이드 형식으로 제공하며, 인기순/신규순으로 정렬된 미디어 정보를 리스트로 확인할 수 있습니다.",
     "features": [
       "영화 및 TV 프로그램 정보 제공",
@@ -50,7 +47,42 @@
       "인기순/신규순 정렬 기능"
     ],
     "tags": ["React", "SASS", "Zustand", "Swiper", "Axios"],
-    "review" : "이 프로젝트를 통해 React와 SASS를 활용한 웹 개발의 기초를 다졌습니다. themoviedb API를 사용하여 실시간 데이터를 가져오는 방법을 배우고, Zustand를 이용한 상태 관리의 중요성을 깨달았습니다. Swiper 라이브러리를 활용하여 슬라이드 기능을 구현하면서 사용자 경험을 향상시키는 방법에 대해 고민하게 되었습니다. 또한, 넷플릭스 스타일의 UI 디자인을 참고하여 사용자 친화적인 인터페이스를 만드는 데 집중했습니다."
+    "review": {
+      "title":"API, 가능성의 확장",
+      "content": "이 프로젝트를 통해 React와 SASS를 활용한 웹 개발의 기초를 다졌습니다. themoviedb API를 사용하여 실시간 데이터를 가져오는 방법을 배우고, Zustand를 이용한 상태 관리의 중요성을 깨달았습니다. Swiper 라이브러리를 활용하여 슬라이드 기능을 구현하면서 사용자 경험을 향상시키는 방법에 대해 고민하게 되었습니다. 또한, 넷플릭스 스타일의 UI 디자인을 참고하여 사용자 친화적인 인터페이스를 만드는 데 집중했습니다."
+    },
+    "details": {
+      "challenge": {
+        "title": "API 데이터 처리",
+        "content": "API를 처음 사용한 프로젝트 입니다. themoviiedb API에서 데이터를 가져오는 과정에서 그 구조를 이해하고 비동기 처리와 상태 관리를 효과적으로 구현하는 데 어려움을 겪었습니다. 이를 해결하기 위해 object의 구조를 공부하고, Axios를 사용하여 API 요청을 관리하고, Zustand를 통해 전역 상태를 관리하는 방법을 익혔습니다."
+      },
+      "goal": {
+        "title": "사용자 경험 향상",
+        "content": "사용자가 영화와 TV 프로그램에 대한 정보를 쉽게 찾을 수 있도록 직관적인 UI를 구현하는 것을 목표로 했습니다. 이를 위해 인기순과 신규순으로 정렬된 리스트를 제공하고, 슬라이드 기능을 통해 실시간 박스오피스 정보를 시각적으로 표현했습니다."
+      },
+      "result": {
+        "title": "성공적인 구현",
+        "content": "프로젝트를 통해 React와 SASS를 활용한 웹 개발의 기초를 다졌으며, themoviedb API를 사용하여 실시간 데이터를 효과적으로 처리하는 방법을 익혔습니다. Zustand를 이용한 상태 관리와 Swiper 라이브러리를 활용한 슬라이드 기능 구현을 통해 사용자 경험을 향상시킬 수 있었습니다."
+      }
+    },
+    "gallary": [
+      {
+        "image": "gallary_1.png",
+        "description": "썸네일 이미지에 마우스를 올렸을 때 재생 버튼이 나타나도록 구현"
+      },
+      {
+        "image": "gallary_2.png",
+        "description": "메뉴에 마우스를 올렸을 때 underline이 좌측에서 우측으로 차오로는 CSS 애니메이션 구현"
+      },
+      {
+        "image": "gallary_3.png",
+        "description": "모바일 해상도 지원"
+      },
+      {
+        "image": "gallary_4.png",
+        "description": "모바일 해상도 지원"
+      }
+    ]
   },
   {
     "id": 4,
@@ -60,12 +92,9 @@
     "member": "개인",
     "year": 2024,
     "github": "https://github.com/SSkkky/MyPortfoilo",
-    "deploy": "https://skyportfoilo.vercel.app/",
+    "website": "https://skyportfoilo.vercel.app/",
     "desc": "2024년까지 개발한 프론트엔드 프로젝트를 소개하는 웹 페이지입니다.",
-    "features": [
-      "방명록 작성 및 수정 삭제",
-      "요소 드래그, 리사이즈"
-    ],
+    "features": ["방명록 작성 및 수정 삭제", "요소 드래그, 리사이즈"],
     "tags": ["React", "TypeScript", "zustand"],
     "review": "개인의 정체성을 담아내기 위해 노트북 배경화면을 컨셉으로 기획, 디자인, 개발한 포트폴리오 소개 웹사이트 입니다. 노트북 환경이라는 컨셉에 맞춰 각 메뉴를 윈도우 창 처럼 구성했습니다. 리사이즈와 드래그가 가능하도록 react-rnd 라이브러리를 사용했습니다. 다른 창과 동시에 존재한다면 특정한 창을 클릭할때마다 z-index를 추가하여 최상단에 노출되도록 했습니다. "
   },
@@ -77,16 +106,25 @@
     "member": "팀(3명)",
     "year": 2024,
     "github": "https://github.com/SSkkky/choding",
-    "deploy": "https://choding.vercel.app/",
+    "website": "https://choding.vercel.app/",
     "desc": "초보들의 코딩 공부, 초딩은 초보 프론트엔드 개발자들이 고민과 포트폴리오를 부담없이 공유할 수 있는 웹 사이트입니다. 저는 초딩 프로젝트에서 메인(home), 회원가입, 로그인, 강의 검색, <내 프로젝트>게시판 기획, 디자인, 개발에 참여했습니다.",
-    "tags": ["Next.js", "Typescript", "axios", "SASS", "zustand", "next-auth", "MongoDB", "Firebase"],
+    "tags": [
+      "Next.js",
+      "Typescript",
+      "axios",
+      "SASS",
+      "zustand",
+      "next-auth",
+      "MongoDB",
+      "Firebase"
+    ],
     "features": [
       "모바일/태블릿/데스크탑 웹 해상도 대응",
       "소셜 로그인, 회원 가입",
       "내 프로젝트 게시글 작성, 수정, 삭제 및 좋아요, 댓글 기능",
       "강의 검색 및 스크랩"
     ],
-    "review" : "<초딩>은 포트폴리오와 이력서를 정리하며 '이런 작은 컴포넌트 단위를 포트폴리오라고 소개해도 되는걸까?', '개발자는 이력서를 어떻게 적어야할까? 누가 알려줬으면 좋겠다' 등 많은 고민을 했던 경험을 토대로 기획한 웹 서비스입니다. 이 프로젝트를 통해 팀원들과 네이밍 규칙을 상의하고 의미를 고민한 것들이 장기적으로 코드 가독성과 유지보수성에 실질적인 영향을 준다고 느꼈습니다. 다음에 또 팀작업을 한다면 초기 세팅부터 문서화까지 더 체계화하는 방향으로 개선 하면 좋겠다고 생각했습니다."
+    "review": "<초딩>은 포트폴리오와 이력서를 정리하며 '이런 작은 컴포넌트 단위를 포트폴리오라고 소개해도 되는걸까?', '개발자는 이력서를 어떻게 적어야할까? 누가 알려줬으면 좋겠다' 등 많은 고민을 했던 경험을 토대로 기획한 웹 서비스입니다. 이 프로젝트를 통해 팀원들과 네이밍 규칙을 상의하고 의미를 고민한 것들이 장기적으로 코드 가독성과 유지보수성에 실질적인 영향을 준다고 느꼈습니다. 다음에 또 팀작업을 한다면 초기 세팅부터 문서화까지 더 체계화하는 방향으로 개선 하면 좋겠다고 생각했습니다."
   },
   {
     "id": 6,
@@ -96,7 +134,7 @@
     "member": "개인",
     "year": 2023,
     "github": "https://github.com/SSkkky/MinchoMap",
-    "deploy": "https://minchomap.vercel.app/",
+    "website": "https://minchomap.vercel.app/",
     "desc": "<민초맵>은 내 주변에서 민트 초코와 관련된 상품을 판매하는 곳을 쉽게 알수있는 지도기반 웹 서비스입니다.",
     "features": [
       "내 주변 가게 검색 및 메뉴 필터",

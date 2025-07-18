@@ -71,8 +71,8 @@ export default function Header() {
         window.open(projectData?.github);
         break;
         
-      case 'deploy':
-        window.open(projectData?.deploy);
+      case 'website':
+        window.open(projectData?.website);
         break;
         
       case 'back':
@@ -89,13 +89,13 @@ export default function Header() {
     }
   }
 
-  const buttonStyle = "w-[48px] h-[48px] transition rounded-full cursor-pointer bg-white max-md:w-[36px] max-md:h-[36px] max-sm:w-[28px] max-sm:h-[28px] max-sm:text-sm";
+  const buttonStyle = "w-[48px] h-[48px] transition rounded-full cursor-pointer max-md:w-[36px] max-md:h-[36px] max-sm:w-[28px] max-sm:h-[28px] max-sm:text-sm hover:bg-gray-100";
 
   const renderRightContent = () => {
     if (segments[0] === "projects") {
       return <>
       <button className={buttonStyle} onClick={()=>clickLinkButtonHandler('github')}><CommitIcon/></button>
-      <button className={buttonStyle} onClick={()=>clickLinkButtonHandler('deploy')}><PublishIcon/></button>
+      <button className={buttonStyle} onClick={()=>clickLinkButtonHandler('website')}><PublishIcon/></button>
       <button className={buttonStyle} onClick={()=>clickLinkButtonHandler('back')}><ArrowBackIcon/></button>
       </>;
     } else if (segments[0] === "introduce") {
