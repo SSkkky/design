@@ -134,7 +134,7 @@ const Content = () => {
           >
             <ul>
               {services.map((item, key) => (
-                <li key={key} className="flex border-t-1 py-3 first:border-t-0">
+                <li key={key} className="flex border-t-1 py-3 first:border-t-0 flex-wrap">
                   <h4 className="w-[90px]">{item.toUpperCase()}</h4>
                   <p
                     className={`flex-1 text-right break-words
@@ -182,7 +182,7 @@ const Content = () => {
       max-md:flex-col max-md:px-4 max-md:py-12">
         <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10
         max-md:border-r-0 max-md:pr-0">
-          <h3>Details</h3>
+          <h3 className="max-[430px]:text-3xl">Details</h3>
           <div className="rotate-90 w-[40px] h-[40px]">
             <ArrowOutward fontSize="inherit" />
           </div>
@@ -194,10 +194,10 @@ const Content = () => {
               className="text-xl border-t-1 first:border-t-0 pt-10 first:pt-0"
             >
               <b>{`(${capitalizedText(item)})`}</b>
-              <h4 className="text-4xl font-bold py-4">
+              <h4 className="text-4xl font-bold py-4 max-[430px]:text-3xl">
                 {data.details[item].title}
               </h4>
-              <p className="leading-8">{data.details[item].content}</p>
+              <p className="leading-8 max-[430px]:text-base">{data.details[item].content}</p>
             </article>
           ))}
         </section>
@@ -207,7 +207,7 @@ const Content = () => {
       max-md:flex-col max-md:px-4 max-md:py-12">
         <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10
         max-md:border-r-0 max-md:pr-0 max-md:flex-0">
-          <h3>Project Gallary</h3>
+          <h3 className="max-[430px]:text-3xl">Project Gallary</h3>
           <div className="rotate-90 w-[40px] h-[40px]">
             <ArrowOutward fontSize="inherit" />
           </div>
@@ -242,14 +242,14 @@ const Content = () => {
       max-md:flex-col max-md:px-4 max-md:py-12">
         <section className="text-4xl font-bold border-r-1 flex-1 flex justify-between pr-10
         max-md:border-r-0 max-md:pr-0 max-md:flex-0">
-          <h3>Review</h3>
+          <h3 className="max-[430px]:text-3xl">Review</h3>
           <div className="rotate-90 w-[40px] h-[40px]">
             <ArrowOutward fontSize="inherit" />
           </div>
         </section>
         <section className="flex-2 flex flex-wrap text-xl">
-          <h4 className="text-4xl font-bold py-4">{data.review.title}</h4>
-          <p className="leading-8">{data.review.content}</p>
+          <h4 className="text-4xl font-bold py-4 max-[430px]:text-3xl">{data.review.title}</h4>
+          <p className="leading-8 max-[430px]:text-base">{data.review.content}</p>
         </section>
       </section>
       {/*         5. gallary modal          */}

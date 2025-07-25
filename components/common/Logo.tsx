@@ -2,8 +2,8 @@
 
 export default function Logo({clickLogoHandler}:any) {
   return (
-    <a className="flex-1">
-      <h1 className="p-3 md:p-4 text-black ">
+    <a className="overflow-hidden">
+      <h1 className="text-black whitespace-nowrap">
         <span className="cursor-pointer" onClick={clickLogoHandler}>
           Sky Archive
         </span>

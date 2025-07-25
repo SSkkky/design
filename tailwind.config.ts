@@ -12,6 +12,7 @@ const config: Config = {
       // 여기서 커스텀 테마 확장 (colors, fontSize 등)
     },
     screens: {
+      mobile: '430px',
       xs: '375px', // 커스텀 브레이크포인트 (예: 모바일용)
       'max-xs': { raw: '(max-width: 374px)' }, // max-width 예제
       ...defaultTheme.screens,
