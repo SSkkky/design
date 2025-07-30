@@ -3,8 +3,7 @@
 import LogoComponent from "./Logo";
 import { useRef, useEffect, useState } from "react";
 import { useSectionRefs } from "@/context/SectionRefContext";
-import PublishIcon from "@mui/icons-material/Publish";
-import CommitIcon from "@mui/icons-material/Commit";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import dataJson from "@/app/assets/data.json";
 
@@ -67,10 +66,6 @@ export default function Header() {
 
   const clickLinkButtonHandler = (key: string) => {
     switch (key) {
-      case "github":
-        window.open(projectData?.github);
-        break;
-
       case "website":
         window.open(projectData?.website);
         break;
@@ -96,39 +91,31 @@ export default function Header() {
     if (segments[0] === "projects") {
       return (
         <>
+          {projectData?.website !== "none" && (
+            <button
+              className={buttonStyle}
+              onClick={() => clickLinkButtonHandler("website")}
+            >
+              <OpenInNewIcon
+                sx={{
+                  "@media (max-width:430px)": {
+                    fontSize: "18px",
+                  },
+                }}
+              />
+            </button>
+          )}
           <button
             className={buttonStyle}
-            onClick={() => clickLinkButtonHandler("github")}
+            onClick={() => clickLinkButtonHandler("back")}
           >
-            <CommitIcon
+            <ArrowBackIcon
               sx={{
                 "@media (max-width:430px)": {
                   fontSize: "18px",
                 },
               }}
             />
-          </button>
-          <button
-            className={buttonStyle}
-            onClick={() => clickLinkButtonHandler("website")}
-          >
-            <PublishIcon 
-              sx={{
-                "@media (max-width:430px)": {
-                  fontSize: "18px",
-                },
-              }}/>
-          </button>
-          <button
-            className={buttonStyle}
-            onClick={() => clickLinkButtonHandler("back")}
-          >
-            <ArrowBackIcon 
-              sx={{
-                "@media (max-width:430px)": {
-                  fontSize: "18px",
-                },
-              }}/>
           </button>
         </>
       );
@@ -185,7 +172,9 @@ export default function Header() {
   };
 
   return (
-    <header className={`fixed flex items-center top-0 left-0 w-full h-[64px] text-black z-1000 font-bold backdrop-blur-sm text-xl md:text-2xl max-[430px]:text-base transform-gpu bg-white/30 justify-between p-12 max-md:p-8 max-sm:p-6 max-[430px]:p-4`}>
+    <header
+      className={`fixed flex items-center top-0 left-0 w-full h-[64px] text-black z-1000 font-bold backdrop-blur-sm text-xl md:text-2xl max-[430px]:text-base transform-gpu bg-white/30 justify-between p-12 max-md:p-8 max-sm:p-6 max-[430px]:p-4`}
+    >
       <LogoComponent clickLogoHandler={() => clickLinkButtonHandler("logo")} />
       <div className="text-center overflow-hidden">{renderCenterContent()}</div>
       <div className="flex justify-end gap-2 text-right pr-2">

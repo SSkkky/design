@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
@@ -20,6 +20,13 @@ export const metadata: Metadata = {
   title: "Sky Archive",
   description: "화면을 개발하는 손하늘의 포트폴리오 아카이빙 사이트입니다.",
 };
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

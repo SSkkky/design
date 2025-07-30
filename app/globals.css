@@ -45,3 +45,17 @@ body {
    66%  {background-position:0    20px,10px 10px,20px 0   }
    100% {background-position:0     0, 10px 10px, 20px 20px}
 }
+
+/* Chrome, Safari 등 WebKit 기반 브라우저 대응 */
+.customScrollBar::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Firefox 등 표준 속성 대응 */
+@supports (scrollbar-color: auto) {
+  .customScrollBar {
+    scrollbar-width: thin;
+    scrollbar-color: white transparent;
+  }
+}

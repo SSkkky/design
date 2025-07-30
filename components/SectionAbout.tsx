@@ -11,12 +11,20 @@ const datas = [
     title: "CAREER",
     content: [
       {
-        date: "2024.07~12",
-        description: "피터패트 (프론트엔드 주니어 개발자)",
+        date: "2024",
+        description: "피터패트 (프론트엔드 개발, 유지보수)",
       },
       {
-        date: "2019~2020",
-        description: "제우메디컬 (퍼블리셔)",
+        date: "2018~2020",
+        description: "제우메디컬 (디자인, 퍼블리셔)",
+      },
+      {
+        date: "2017~2018",
+        description: "미스크 (디자인)",
+      },
+      {
+        date: "2014~2016",
+        description: "창기획(광고, 판촉물 디자인)",
       },
     ],
   },
@@ -25,11 +33,15 @@ const datas = [
     content: [
       {
         date: "2023.10~2024.04",
-        description: "그린 컴퓨터 아카데미 프론트엔드 교육과정",
+        description: "프론트엔드 개발자 양성과정(그린 컴퓨터 아카데미)",
       },
       {
         date: "2020~2024",
-        description: "서울과학기술대학교 문화예술학과 졸업",
+        description: "서울과학기술대학교 문화예술학과(졸업)",
+      },
+      {
+        date: "2017",
+        description: "UI/UX 디자인 부트캠프(봄아카데미)",
       },
     ],
   }
@@ -43,6 +55,11 @@ export default function SectionAbout({ref}:any) {
 
   const SkillListComponents = () => {
     const skillList = [
+      "PHOTOSHOP",
+      "ILLUSTRATOR",
+      "FIGMA",
+      "WEB DESIGN",
+      "UI/UX DESIGN",
       "HTML",
       "CSS",
       "JS",
