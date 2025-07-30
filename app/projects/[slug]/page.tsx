@@ -236,7 +236,7 @@ const Content = () => {
               이런 업무를 담당했습니다
             </h4>
             <ol className="list-disc leading-8 max-[430px]:text-base pl-6">
-              {data.scope.map((text, key) => (
+              {data.scope.map((text:string, key:number) => (
                 <li key={key}>{text}</li>
               ))}
             </ol>
