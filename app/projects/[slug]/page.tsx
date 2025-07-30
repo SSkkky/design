@@ -156,7 +156,7 @@ const Content = () => {
         max-md:flex-col "
         >
           <p className="font-bold text-2xl flex-2 mt-3">
-            {data.desc.split("/n").map((it, idx) => (
+            {data.desc.split("/n").map((it:string, idx:number) => (
               <span key={idx}>
                 {it}
                 <br />
