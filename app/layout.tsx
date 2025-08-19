@@ -18,7 +18,7 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
   title: "Sky Archive",
-  description: "화면을 개발하는 손하늘의 포트폴리오 아카이빙 사이트입니다.",
+  description: "화면을 만드는 손하늘의 디자인 포트폴리오 아카이빙 사이트입니다.",
 };
 
 export const viewport: Viewport = {

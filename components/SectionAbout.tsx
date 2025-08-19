@@ -12,7 +12,7 @@ const datas = [
     content: [
       {
         date: "2024",
-        description: "피터패트 (프론트엔드 개발, 유지보수)",
+        description: "피터패트 (프론트엔드, 유지보수)",
       },
       {
         date: "2018~2020",
@@ -31,10 +31,6 @@ const datas = [
   {
     title: "EDUCATION",
     content: [
-      {
-        date: "2023.10~2024.04",
-        description: "프론트엔드 개발자 양성과정(그린 컴퓨터 아카데미)",
-      },
       {
         date: "2020~2024",
         description: "서울과학기술대학교 문화예술학과(졸업)",
@@ -101,7 +97,7 @@ export default function SectionAbout({ref}:any) {
         </h2>
         <p>
           안녕하세요! <br />
-          즐겁게 개발하는 개발자 손하늘입니다.
+          화면을 만드는 디자이너 손하늘입니다.
         </p>
       </article>
       <article className={`${articleCommonStyles} col-span-2 xl:col-span-2 border-r border-b`}>
